@@ -11,6 +11,7 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyModule } from '@ngx-formly/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,6 +29,8 @@ import { ErrorComponent } from './pages/error/error.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { PostComponent } from './pages/post/post.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,8 @@ import { RegisterComponent } from './pages/register/register.component';
     ContactComponent,
     LoginComponent,
     RegisterComponent,
+    PostComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +64,7 @@ import { RegisterComponent } from './pages/register/register.component';
     FormlyMaterialModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatDialogModule,
     TranslateModule.forRoot(),
   ],
   providers: [],

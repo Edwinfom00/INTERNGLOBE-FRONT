@@ -9,6 +9,8 @@ import { ErrorComponent } from '../error/error.component';
 import { ContactComponent } from '../contact/contact.component';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
+import { PostComponent } from '../post/post.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 const routes: Routes = [
   {
@@ -46,6 +48,14 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'post',
+    component: PostComponent,
+  },
+  {
+    path: 'setting',
+    component: ProfileComponent,
   },
 ];
 

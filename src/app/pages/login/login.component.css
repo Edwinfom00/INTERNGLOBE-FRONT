@@ -1,0 +1,8 @@
+.card {
+  width: 450px;
+  height: 400px;
+}
+.card-header {
+  font-size: 22px;
+  font-weight: bold;
+}
