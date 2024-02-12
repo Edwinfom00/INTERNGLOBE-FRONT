@@ -12,6 +12,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { MatIconModule } from '@angular/material/icon';
@@ -54,7 +55,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     CarouselModule,
-    AlertModule,
+    AlertModule.forRoot(),
     ButtonsModule,
     FormsModule,
     MatToolbarModule,
@@ -65,6 +66,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatDialogModule,
+    HttpClientModule,
     TranslateModule.forRoot(),
   ],
   providers: [],

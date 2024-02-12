@@ -1,30 +1,34 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { contact } from './model/student.model';
-
-import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent {
-  studentForm: FormGroup;
+export class RegisterComponent implements OnInit {
+  formData = {
+    name: '',
+    email: '',
+    password: '',
+    user_type: '',
+  };
+  showSuccessAlert = false;
+  ngOnInit(): void {}
 
-  studentModel: contact;
+  constructor(private http: HttpClient) {}
 
-  studentFields: Array<FormlyFieldConfig>;
+  Register() {
+    this.http
+      .post('http://localhost:8000/api/register', this.formData)
+      .subscribe((resultData: any) => {
+        console.log(resultData);
+        this.showSuccessAlert = true; // Affiche l'alerte
 
-  constructor() {
-    this.studentForm = new FormGroup({});
-
-    this.studentModel = new contact();
-
-    this.studentFields = this.studentModel.formFields();
-  }
-
-  SubmitForm(contact: contact) {
-    console.log(contact);
+        this.formData.name = '';
+        this.formData.email = '';
+        this.formData.password = '';
+        this.formData.user_type = '';
+      });
   }
 }
