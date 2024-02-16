@@ -1,67 +1,75 @@
 <div class="card">
-  <div class="card-header text-secondary">Log In</div>
-  <alert type="success" [dismissible]="true" *ngIf="showSuccessAlert">
-    Connected Successfully
-  </alert>
-  <div class="card-body m-2">
-    <form action="" class="w-100" (ngSubmit)="Login()">
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
+  <div class="card-body">
+    <div class="text-center mb-2">
+      <h3 class="fw-bold fs-5">Log In</h3>
+      <p class="text-secondary">Get access to your account</p>
+    </div>
+    <alert type="success" [dismissible]="true" *ngIf="showSuccessAlert">
+      Connected Successfully
+    </alert>
+    <form action="" (ngSubmit)="LoginWithGoogle()">
+      <button
+        type="submit"
+        class="btn btn-lg btn-outline-secondary w-100"
+        name="googl_id"
+        [(ngModel)]="formData.google_id"
+      >
+        <i class="fab fa-google text-danger fs-6"></i>&nbsp;&nbsp;<span
+          class="text-warning"
+          >Login</span
+        >&nbsp;&nbsp;
+        <span class="text-success">with</span>
+        Google
+      </button>
+    </form>
+    <div class="position-relative">
+      <hr class="text-secondary divider" />
+      <div class="divider-content-center">Or</div>
+    </div>
+    <form action="" (ngSubmit)="Login()">
+      <div class="input-group mb-3">
+        <span class="input-group-text">
+          <i class="fas fa-envelope"></i>
+        </span>
         <input
-          type="email"
-          class="form-control"
+          type="text"
+          class="form-control form-control-lg fs-6"
+          placeholder="Email address"
           name="email"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
           [(ngModel)]="formData.email"
         />
-        <div id="emailHelp" class="form-text">
-          We'll never share your email with anyone else.
-        </div>
       </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text">
+          <i class="fas fa-lock"></i>
+        </span>
         <input
           type="password"
-          class="form-control"
-          name="password"
-          id="exampleInputPassword1"
+          class="form-control form-control-lg fs-6"
+          placeholder="Password"
+          name="email"
           [(ngModel)]="formData.password"
         />
       </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      <div class="input-group mb-3 d-flex justify-content-between">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="formCheck" />
+          <label for="formCheck" class="form-check-label text-secondary"
+            ><small>Remember Me</small></label
+          >
+        </div>
+        <div>
+          <small><a href="">Forgot Password</a></small>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-9">
-          <div class="row">
-            <div class="col-4">
-              <button type="submit" class="btn btn-outline-secondary">
-                Log In
-              </button>
-            </div>
-            <div class="col-5">
-              <small
-                ><a href="" class="text-secondary" routerLink="profile"
-                  ><small>Don't Have An Account</small></a
-                ></small
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-3 text-end">
-          <form action="" (ngSubmit)="LoginWithGoogle()">
-            <button
-              type="submit"
-              class="btn btn-outline-secondary btn-social"
-              name="googl_id"
-              [(ngModel)]="formData.google_id"
-            >
-              <i class="fab fa-google"></i>
-            </button>
-          </form>
-        </div>
+      <button type="submit" class="btn btn-outline-secondary btn-lg w-100">
+        Login
+      </button>
+      <div class="text-center">
+        <small
+          >Don't have an account?
+          <a routerLink="register" class="fw-bold">Sign up</a></small
+        >
       </div>
     </form>
   </div>

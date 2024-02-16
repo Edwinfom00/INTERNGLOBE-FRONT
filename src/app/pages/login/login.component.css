@@ -1,8 +1,59 @@
 .card {
   width: 450px;
-  height: 400px;
+  height: 430px;
+  display: flex;
+  justify-content: center;
 }
-.card-header {
-  font-size: 22px;
-  font-weight: bold;
+
+.card .card-body form {
+  width: 100%;
+  max-width: 430px;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.btn i {
+  vertical-align: text-top;
+}
+.divider-content-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #fff;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #999;
+}
+
+.divider {
+  margin: 2rem 0;
+}
+
+@media (max-width: 500px) {
+  .card {
+    align-items: center;
+  }
+}
+@media (max-width: 450px) {
+  .card {
+    align-items: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .card {
+    align-items: center;
+  }
 }
