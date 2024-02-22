@@ -32,6 +32,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { PostComponent } from './pages/post/post.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { CompanyProfileComponent } from './pages/company-profile/company-profile.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     RegisterComponent,
     PostComponent,
     ProfileComponent,
+    CompanyProfileComponent,
   ],
   imports: [
     BrowserModule,

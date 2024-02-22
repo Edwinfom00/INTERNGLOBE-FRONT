@@ -64,6 +64,10 @@ body {
   color: #ffffff;
 }
 
+.btn-outline-secondary:hover {
+  color: #ffffff;
+}
+
 .btn-square {
   width: 38px;
   height: 38px;

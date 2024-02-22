@@ -11,6 +11,7 @@ import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { PostComponent } from '../post/post.component';
 import { ProfileComponent } from '../profile/profile.component';
+import { CompanyProfileComponent } from '../company-profile/company-profile.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'setting',
     component: ProfileComponent,
+  },
+  {
+    path: 'companyprofile',
+    component: CompanyProfileComponent,
   },
 ];
 
