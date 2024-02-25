@@ -73,7 +73,13 @@
       </div>
       <div class="col-lg-9">
         <div class="card border-0 shadow mb-4">
-          <form action="" method="post" id="userForm" name="userForm">
+          <form
+            action=""
+            method="post"
+            id="userForm"
+            name="userForm"
+            (ngSubmit)="UpdateProfile()"
+          >
             <div class="card-body p-4">
               <h3 class="fs-4 mb-1">My Profile</h3>
               <div class="mb-4">
@@ -84,7 +90,8 @@
                   id="name"
                   placeholder="Enter Name"
                   class="form-control"
-                  value=""
+                  value="{{ FormData.name }}"
+                  [(ngModel)]="FormData.name"
                 />
                 <p></p>
               </div>
@@ -96,7 +103,8 @@
                   id="email"
                   placeholder="Enter Email"
                   class="form-control"
-                  value=""
+                  value="{{ FormData.email }}"
+                  [(ngModel)]="FormData.email"
                 />
                 <p></p>
               </div>
@@ -109,6 +117,7 @@
                   placeholder="Address"
                   class="form-control"
                   value=""
+                  [(ngModel)]="FormData.address"
                 />
               </div>
               <div class="mb-4">
@@ -120,6 +129,7 @@
                   placeholder="Mobile"
                   class="form-control"
                   value=""
+                  [(ngModel)]="FormData.phone"
                 />
               </div>
               <div class="mb-4">
@@ -131,18 +141,31 @@
                   placeholder="Mobile"
                   class="form-control"
                   value=""
+                  [(ngModel)]="FormData.dob"
                 />
               </div>
               <div class="mb-4">
                 <label for="" class="mb-2">gender*</label>
-                <input
-                  type="tel"
-                  name="mobile"
-                  id="mobile"
-                  placeholder="Mobile"
-                  class="form-control"
-                  value=""
-                />
+                <div class="row">
+                  <div class="col-3">
+                    <input
+                      type="radio"
+                      name="genre"
+                      class="form-check-input"
+                      value="mal"
+                      [(ngModel)]="FormData.gender"
+                    />
+                    <label for="" class="mx-2">Mal</label>
+                    <input
+                      type="radio"
+                      name="genre"
+                      class="form-check-input"
+                      value="female"
+                      [(ngModel)]="FormData.gender"
+                    />
+                    <label for="" class="mx-2">Female</label>
+                  </div>
+                </div>
               </div>
               <div class="mb-4">
                 <label for="" class="mb-2">Bio*</label>
@@ -153,6 +176,7 @@
                   placeholder="Bio"
                   class="form-control"
                   value=""
+                  [(ngModel)]="FormData.bio"
                 ></textarea>
               </div>
             </div>
