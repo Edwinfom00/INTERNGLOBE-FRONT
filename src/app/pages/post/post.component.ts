@@ -1,3 +1,4 @@
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent {
+
+
+  getHeaders(): HttpHeaders {
+    const accessToken = localStorage.getItem('access_token');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    });
+  }
+
+  constructor(private httpclient : HttpClient){}
+
+
+
 
 }

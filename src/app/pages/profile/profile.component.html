@@ -78,7 +78,7 @@
             method="post"
             id="userForm"
             name="userForm"
-            (ngSubmit)="UpdateProfile()"
+            (ngSubmit)="UpdateWritingProfile()"
           >
             <div class="card-body p-4">
               <h3 class="fs-4 mb-1">My Profile</h3>
@@ -190,31 +190,38 @@
 
         <div class="card border-0 shadow mb-4">
           <div class="card-body p-4">
-            <h3 class="fs-4 mb-1">Change Password</h3>
-            <div class="mb-4">
-              <label for="" class="mb-2">Old Password*</label>
-              <input
-                type="password"
-                placeholder="Old Password"
-                class="form-control"
-              />
-            </div>
-            <div class="mb-4">
-              <label for="" class="mb-2">New Password*</label>
-              <input
-                type="password"
-                placeholder="New Password"
-                class="form-control"
-              />
-            </div>
-            <div class="mb-4">
+            <form action="" (ngSubmit)="UpdatePassword()">
+              <h3 class="fs-4 mb-1">Change Password</h3>
+              <div class="mb-4">
+                <label for="" class="mb-2">Old Password*</label>
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Old Password"
+                  class="form-control"
+                  [(ngModel)]="FormData.current_password"
+                />
+              </div>
+              <div class="mb-4">
+                <label for="" class="mb-2">New Password*</label>
+                <input
+                  name="newpassword"
+                  type="password"
+                  placeholder="New Password"
+                  class="form-control"
+                  [(ngModel)]="FormData.new_password"
+                />
+              </div>
+            </form>
+
+            <!-- <div class="mb-4">
               <label for="" class="mb-2">Confirm Password*</label>
               <input
                 type="password"
                 placeholder="Confirm Password"
                 class="form-control"
               />
-            </div>
+            </div> -->
           </div>
           <div class="card-footer p-4">
             <button type="submit" class="btn btn-outline-secondary">
@@ -223,26 +230,33 @@
           </div>
         </div>
         <div class="card border-0 shadow mb-4">
-          <div class="card-body p-4">
-            <h3 class="fs-4 mb-1">Document Upload</h3>
-            <div class="mb-4">
-              <label for="" class="mb-2">Cover Letter*</label>
-              <input
-                type="file"
-                placeholder="Upload Cover Letter"
-                class="form-control"
-              />
+          <form action="" (ngSubmit)="doUpdate($event)">
+            <div class="card-body p-4">
+              <h3 class="fs-4 mb-1">Document Upload</h3>
+              <div class="mb-4">
+                <label for="" class="mb-2">Cover Letter*</label>
+                <input
+                  type="file"
+                  name="cover_letter"
+                  placeholder="Upload Cover Letter"
+                  class="form-control"
+                />
+              </div>
+              <div class="mb-4">
+                <label for="" class="mb-2">CV*</label>
+                <input
+                  type="file"
+                  placeholder="Upload CV"
+                  class="form-control"
+                />
+              </div>
             </div>
-            <div class="mb-4">
-              <label for="" class="mb-2">CV*</label>
-              <input type="file" placeholder="Upload CV" class="form-control" />
+            <div class="card-footer p-4">
+              <button type="submit" class="btn btn-outline-secondary">
+                Upload
+              </button>
             </div>
-          </div>
-          <div class="card-footer p-4">
-            <button type="submit" class="btn btn-outline-secondary">
-              Upload
-            </button>
-          </div>
+          </form>
         </div>
       </div>
     </div>

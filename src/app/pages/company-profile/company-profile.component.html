@@ -4,7 +4,7 @@
       <div class="col">
         <nav aria-label="breadcrumb" class="rounded-3 p-3 mb-4">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
             <li class="breadcrumb-item active">Account Settings</li>
           </ol>
         </nav>
@@ -50,17 +50,7 @@
               <li
                 class="list-group-item d-flex justify-content-between align-items-center p-3"
               >
-                <a href="">My Intern</a>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center p-3"
-              >
-                <a href="">Intern Applied</a>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center p-3"
-              >
-                <a href="">Saved Intern</a>
+                <a href="">Intern Posted</a>
               </li>
               <li
                 class="list-group-item d-flex justify-content-between align-items-center p-3"
@@ -73,9 +63,13 @@
       </div>
       <div class="col-lg-9">
         <div class="card border-0 shadow mb-4">
-          <form action="" method="post" id="userForm" name="userForm">
+          <form
+            action=""
+            method="post"
+            (ngSubmit)="UpdateWrittingCompayIformation()"
+          >
             <div class="card-body p-4">
-              <h3 class="fs-4 mb-1">Company Profile</h3>
+              <h3 class="fs-4 mb-1">Create Your Company</h3>
               <div class="mb-4">
                 <label for="" class="mb-2">Name*</label>
                 <input
@@ -85,31 +79,61 @@
                   placeholder="Enter Name"
                   class="form-control"
                   value=""
+                  [(ngModel)]="FormData.cname"
                 />
                 <p></p>
               </div>
               <div class="mb-4">
                 <label for="" class="mb-2">Email*</label>
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   id="email"
                   placeholder="Enter Email"
                   class="form-control"
                   value=""
+                  [(ngModel)]="FormData.email"
                 />
                 <p></p>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Designation</label>
+                <label for="" class="mb-2">Address*</label>
                 <input
                   type="text"
-                  name="designation"
-                  id="designation"
-                  placeholder="Designation"
+                  name="address"
+                  id="address"
+                  placeholder="Enter Address"
                   class="form-control"
                   value=""
+                  [(ngModel)]="FormData.address"
                 />
+                <p></p>
+              </div>
+              <div class="mb-4">
+                <label for="" class="mb-2">Website*</label>
+                <input
+                  type="text"
+                  name="website"
+                  id="email"
+                  placeholder="Enter Your Website(Optional)"
+                  class="form-control"
+                  value=""
+                  [(ngModel)]="FormData.website"
+                />
+                <p></p>
+              </div>
+              <div class="mb-4">
+                <label for="" class="mb-2">SLogan*</label>
+                <input
+                  type="text"
+                  name="slogan"
+                  id="email"
+                  placeholder="Slogan of your Company"
+                  class="form-control"
+                  value=""
+                  [(ngModel)]="FormData.slogan"
+                />
+                <p></p>
               </div>
               <div class="mb-4">
                 <label for="" class="mb-2">Mobile</label>
@@ -120,6 +144,51 @@
                   placeholder="Mobile"
                   class="form-control"
                   value=""
+                  [(ngModel)]="FormData.phone"
+                />
+              </div>
+              <div class="mb-4">
+                <label for="" class="mb-2">Description</label>
+                <textarea
+                  rows="5"
+                  cols="5"
+                  name="description"
+                  id="description"
+                  placeholder="Description"
+                  class="form-control"
+                  value=""
+                  [(ngModel)]="FormData.description"
+                ></textarea>
+              </div>
+            </div>
+            <div class="card-footer p-4">
+              <button type="submit" class="btn btn-outline-secondary">
+                Create
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <form action="" (ngSubmit)="UpdatePassword()">
+          <div class="card border-0 shadow mb-4">
+            <div class="card-body p-4">
+              <h3 class="fs-4 mb-1">Change Password If you Want</h3>
+              <div class="mb-4">
+                <label for="" class="mb-2">Old Password*</label>
+                <input
+                  type="password"
+                  placeholder="Old Password"
+                  class="form-control"
+                  [(ngModel)]="FormData.current_password"
+                />
+              </div>
+              <div class="mb-4">
+                <label for="" class="mb-2">New Password*</label>
+                <input
+                  type="password"
+                  placeholder="New Password"
+                  class="form-control"
+                  [(ngModel)]="FormData.new_password"
                 />
               </div>
             </div>
@@ -128,48 +197,14 @@
                 Update
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
 
-        <div class="card border-0 shadow mb-4">
-          <div class="card-body p-4">
-            <h3 class="fs-4 mb-1">Change Password</h3>
-            <div class="mb-4">
-              <label for="" class="mb-2">Old Password*</label>
-              <input
-                type="password"
-                placeholder="Old Password"
-                class="form-control"
-              />
-            </div>
-            <div class="mb-4">
-              <label for="" class="mb-2">New Password*</label>
-              <input
-                type="password"
-                placeholder="New Password"
-                class="form-control"
-              />
-            </div>
-            <div class="mb-4">
-              <label for="" class="mb-2">Confirm Password*</label>
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                class="form-control"
-              />
-            </div>
-          </div>
-          <div class="card-footer p-4">
-            <button type="submit" class="btn btn-outline-secondary">
-              Update
-            </button>
-          </div>
-        </div>
         <div class="card border-0 shadow mb-4">
           <div class="card-body p-4">
             <h3 class="fs-4 mb-1">Document Upload</h3>
             <div class="mb-4">
-              <label for="" class="mb-2">Cover Letter*</label>
+              <label for="" class="mb-2">Banner Image</label>
               <input
                 type="file"
                 placeholder="Upload Cover Letter"
@@ -177,7 +212,7 @@
               />
             </div>
             <div class="mb-4">
-              <label for="" class="mb-2">CV*</label>
+              <label for="" class="mb-2"></label>
               <input type="file" placeholder="Upload CV" class="form-control" />
             </div>
           </div>

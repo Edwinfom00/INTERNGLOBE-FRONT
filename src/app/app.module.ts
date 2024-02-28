@@ -33,6 +33,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { PostComponent } from './pages/post/post.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CompanyProfileComponent } from './pages/company-profile/company-profile.component';
+import { CompanyComponent } from './pages/company/company.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { CompanyProfileComponent } from './pages/company-profile/company-profile
     PostComponent,
     ProfileComponent,
     CompanyProfileComponent,
+    CompanyComponent,
   ],
   imports: [
     BrowserModule,
