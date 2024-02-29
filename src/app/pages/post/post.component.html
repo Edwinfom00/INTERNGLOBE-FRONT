@@ -56,6 +56,7 @@
           method="post"
           id="createInternForm"
           name="createInternForm"
+          (ngSubmit)="PostIntern()"
         >
           <div class="card border-0 shadow mb-4">
             <div class="card-body card-form p-4">
@@ -71,6 +72,7 @@
                     id="title"
                     name="title"
                     class="form-control"
+                    [(ngModel)]="FormData.title"
                   />
                   <p></p>
                 </div>
@@ -78,7 +80,12 @@
                   <label for="" class="mb-2"
                     >Category<span class="req">*</span></label
                   >
-                  <select name="category" id="category" class="form-control">
+                  <select
+                    name="category_id"
+                    id="category"
+                    class="form-control"
+                    [(ngModel)]="FormData.category_id"
+                  >
                     <option value="">Select a Category</option>
                   </select>
                   <p></p>
@@ -90,40 +97,34 @@
                   <label for="" class="mb-2"
                     >Intern Type<span class="req">*</span></label
                   >
-                  <select name="jobType" id="jobType" class="form-select">
+                  <select
+                    name="jobType"
+                    id="jobType"
+                    class="form-select"
+                    [(ngModel)]="FormData.type"
+                  >
                     <option value="">Select Intern Type</option>
                   </select>
                   <p></p>
                 </div>
                 <div class="col-md-6 mb-4">
                   <label for="" class="mb-2"
-                    >Vacancy<span class="req">*</span></label
+                    >Addresse<span class="req">*</span></label
                   >
                   <input
-                    type="number"
-                    min="1"
-                    placeholder="Vacancy"
-                    id="vacancy"
-                    name="vacancy"
+                    type="text"
+                    placeholder="Address"
+                    id="address"
+                    name="address"
                     class="form-control"
+                    [(ngModel)]="FormData.address"
                   />
                   <p></p>
                 </div>
               </div>
 
               <div class="row">
-                <div class="mb-4 col-md-6">
-                  <label for="" class="mb-2">Slug</label>
-                  <input
-                    type="text"
-                    placeholder="Slug"
-                    id="slug"
-                    name="slug"
-                    class="form-control"
-                  />
-                </div>
-
-                <div class="mb-4 col-md-6">
+                <div class="mb-4">
                   <label for="" class="mb-2"
                     >Location<span class="req">*</span></label
                   >
@@ -133,6 +134,7 @@
                     id="location"
                     name="location"
                     class="form-control"
+                    [(ngModel)]="FormData.position"
                   />
                   <p></p>
                 </div>
@@ -149,6 +151,7 @@
                   cols="5"
                   rows="5"
                   placeholder="Description"
+                  [(ngModel)]="FormData.description"
                 ></textarea>
                 <p></p>
               </div>
@@ -175,14 +178,15 @@
                 ></textarea>
               </div> -->
               <div class="mb-4">
-                <label for="" class="mb-2">Qualifications</label>
+                <label for="" class="mb-2">Role*</label>
                 <textarea
                   class="form-control"
-                  name="qualifications"
-                  id="qualifications"
+                  name="roles"
+                  id="role"
                   cols="5"
                   rows="5"
-                  placeholder="Qualifications"
+                  placeholder="role"
+                  [(ngModel)]="FormData.roles"
                 ></textarea>
               </div>
               <div class="mb-4">
@@ -190,8 +194,9 @@
                 <input
                   type="date"
                   placeholder="Last Date"
-                  c
+                  name="last_date"
                   class="form-control"
+                  [(ngModel)]="FormData.last_date"
                 />
               </div>
               <div class="mb-4">

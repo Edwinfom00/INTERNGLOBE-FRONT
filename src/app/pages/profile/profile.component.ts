@@ -65,6 +65,8 @@ export class ProfileComponent {
 
         formData.append('cover_letter', coverLetter);
 
+        console.log(formData);
+
         this.httpclient
           .put('http://localhost:8000/api/user/profile/coverletter', formData, {
             headers: this.getHeaders(),

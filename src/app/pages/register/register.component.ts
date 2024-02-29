@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
 
           switch (this.formData.user_type) {
             case 'company':
-              this.router.navigate(['/companyProfile']);
+              this.router.navigate(['/companyprofile']);
               break;
             case 'user':
               this.router.navigate(['/setting']);

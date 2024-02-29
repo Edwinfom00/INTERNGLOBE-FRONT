@@ -51,7 +51,7 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'post',
+    path: 'companyprofile/post',
     component: PostComponent,
   },
   {
