@@ -1,12 +1,27 @@
 import { Component, OnInit, HostBinding, effect, signal } from '@angular/core';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
-import { Intern } from './model/interns';
+import { Router } from '@angular/router';
 
+// interface Intern {
+//   user_id: string;
+//   company_id: string;
+//   title: 'fbgkfbbjgfjkb';
+//   slug: string;
+//   description: string;
+//   roles: string;
+//   category_id: string;
+//   position: string;
+//   address: string;
+//   featured: string;
+//   type: string;
+//   status: string;
+//   last_date: string;
+// }
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,23 +41,36 @@ export class HomeComponent implements OnInit {
       Authorization: `Bearer ${accessToken}`,
     });
   }
+
   constructor(
     private translateService: TranslateService,
-    private httpclient: HttpClient
+    private httpclient: HttpClient,
+    private route: Router,
+    private datepipe: DatePipe
   ) {
     effect(() => {
       window.localStorage.setItem('darkMode', JSON.stringify(this.darkMode()));
     });
   }
 
-  allInterns: Intern[] = []; // ca c'est mon tableau pour afficher toutes les offres
+  // allInterns: Intern[] = []; // ca c'est mon tableau pour afficher toutes les offres
+  InternData: any;
+  n: number = 10; // ou n peut être n'importe quelle valeur que vous voulez
+  date: Date = new Date();
+
+  range(n: number): number[] {
+    return Array(n)
+      .fill(0)
+      .map((x, i) => i);
+  }
 
   ngOnInit(): void {
-    this.fetchIntern(); // grace a ceci ca s'applique automatiquement
+    // this.fetchIntern(); // grace a ceci ca s'applique automatiquement
+    this.NewFetchIntern();
   }
 
   onInternFetch() {
-    this.fetchIntern();
+    // this.fetchIntern();
   }
   translate(key: string): string {
     return this.translateService.translations(key);
@@ -82,26 +110,47 @@ export class HomeComponent implements OnInit {
     return this.darkMode();
   }
 
-  private fetchIntern() {
-    // c'est la fonction pour afficher les information
+  // fetchIntern() {
+  //   // c'est la fonction pour afficher les information
+  //   this.httpclient
+  //     .get<{ [key: string]: Intern }>('http://localhost:8000/api/home')
+  //     .pipe(
+  //       // ceci me permet de convertir en objet
+  //       map((res) => {
+  //         const interns = [];
+  //         for (const key in res) {
+  //           if (res.hasOwnProperty(key)) {
+  //             interns.push({
+  //               ...res[key],
+  //               id: key,
+  //             });
+  //           }
+  //         }
+  //         return interns;
+  //       })
+  //     )
+  //     .subscribe((interns) => {
+  //       console.log(interns);
+  //       this.allInterns = interns;
+  //       console.log(this.allInterns);
+  //       // this.f = this.allInterns;
+  //     });
+  // }
+
+  NewFetchIntern() {
     this.httpclient
-      .get<{ [key: string]: Intern }>('http://localhost:8000/api/home')
-      .pipe(
-        // ceci me permet de convertir en objet
-        map((res) => {
-          const interns = [];
-          for (const key in res) {
-            if (res.hasOwnProperty(key)) {
-              interns.push({ ...res[key], id: key });
-            }
-          }
-          return interns;
-        })
-      )
-      .subscribe((interns) => {
-        // console.log(interns);
-        this.allInterns = interns;
-        // console.log(this.allInterns);
+      .get('http://localhost:8000/api/home')
+      .subscribe((res: any) => {
+        console.log(res);
+        this.InternData = res;
+      });
+  }
+
+  GetDetailOffer(IntenrId: number) {
+    this.httpclient
+      .get(`http://localhost:8000/api/interns/${IntenrId}`)
+      .subscribe((res: any) => {
+        this.route.navigate(['/intershipdetails', IntenrId]);
       });
   }
 }

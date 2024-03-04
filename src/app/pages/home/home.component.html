@@ -370,7 +370,11 @@
         </li>
       </ul>
       <div class="tab-content">
-        <div id="tab-1" class="tab-pane fade show p-0 active">
+        <div
+          id="tab-1"
+          class="tab-pane fade show p-0 active"
+          *ngFor="let intern of InternData"
+        >
           <div class="internship-item p-4 mb-4">
             <div class="row g-4">
               <div class="col-sm-12 col-md-8 d-flex align-items-center">
@@ -381,10 +385,12 @@
                   style="width: 80px; height: 80px"
                 />
                 <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Software Engineer</h5>
+                  <h5 class="mb-3 dark:text-white">
+                    {{ intern.data[0].title }}
+                  </h5>
                   <span class="text-truncate me-3"
                     ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
+                    >{{ intern.data[0].address }}</span
                   >
                   <span class="text-truncate me-3"
                     ><i class="far fa-clock text-secondary me-2"></i>8h -
@@ -399,11 +405,21 @@
                   <a class="btn btn-light btn-square me-3" href=""
                     ><i class="far fa-heart text-secondary"></i
                   ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
+                  <form action="">
+                    <button
+                      type="submit"
+                      class="btn btn-outline-secondary"
+                      href=""
+                      (click)="GetDetailOffer(intern.data[0].id)"
+                    >
+                      Apply Now
+                    </button>
+                  </form>
                 </div>
                 <small class="text-truncate"
                   ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
+                  Line:
+                  {{ intern.data[0].last_date | date : "mediumDate" }}</small
                 >
               </div>
             </div>
@@ -417,11 +433,13 @@
                   alt=""
                   style="width: 80px; height: 80px"
                 />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Marketing Manager</h5>
-                  <span class="text-truncate me-3"
+                <div class="text-start text-truncate text-wrap ps-4">
+                  <h5 class="mb-3 dark:text-white">
+                    {{ intern.data[1].title }}
+                  </h5>
+                  <span class="me-3"
                     ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
+                    >{{ intern.data[1].address }}</span
                   >
                   <span class="text-truncate me-3"
                     ><i class="far fa-clock text-secondary me-2"></i>8h -
@@ -436,11 +454,19 @@
                   <a class="btn btn-light btn-square me-3" href=""
                     ><i class="far fa-heart text-secondary"></i
                   ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="submit"
+                    (click)="GetDetailOffer(intern.data[1].id)"
+                  >
+                    Apply Now
+                  </button>
                 </div>
                 <small class="text-truncate"
                   ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
+                  Line:{{
+                    intern.data[1].last_date | date : "mediumDate"
+                  }}</small
                 >
               </div>
             </div>
@@ -455,10 +481,12 @@
                   style="width: 80px; height: 80px"
                 />
                 <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Product Designer</h5>
-                  <span class="text-truncate me-3"
+                  <h5 class="mb-3 text-truncate text-wrap dark:text-white">
+                    {{ intern.data[2].title }}
+                  </h5>
+                  <span class="text-truncate text-wrap me-3"
                     ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
+                    >{{ intern.data[2].address }}</span
                   >
                   <span class="text-truncate me-3"
                     ><i class="far fa-clock text-secondary me-2"></i>8h -
@@ -473,11 +501,19 @@
                   <a class="btn btn-light btn-square me-3" href=""
                     ><i class="far fa-heart text-secondary"></i
                   ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
+                  <button
+                    type="submit"
+                    class="btn btn-outline-secondary"
+                    (click)="GetDetailOffer(intern.data[2].id)"
+                  >
+                    Apply Now
+                  </button>
                 </div>
                 <small class="text-truncate"
                   ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
+                  Line:{{
+                    intern.data[2].last_date | date : "mediumDate"
+                  }}</small
                 >
               </div>
             </div>
@@ -491,11 +527,13 @@
                   alt=""
                   style="width: 80px; height: 80px"
                 />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Creative Director</h5>
+                <div class="text-start text-truncate text-wrap ps-4">
+                  <h5 class="mb-3 dark:text-white">
+                    {{ intern.data[3].title }}
+                  </h5>
                   <span class="text-truncate me-3"
                     ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
+                    >{{ intern.data[3].address }}</span
                   >
                   <span class="text-truncate me-3"
                     ><i class="far fa-clock text-secondary me-2"></i>8h -
@@ -510,11 +548,18 @@
                   <a class="btn btn-light btn-square me-3" href=""
                     ><i class="far fa-heart text-secondary"></i
                   ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
+                  <button
+                    class="btn btn-outline-secondary"
+                    href=""
+                    (click)="GetDetailOffer(intern.data[3].id)"
+                  >
+                    Apply Now
+                  </button>
                 </div>
                 <small class="text-truncate"
                   ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
+                  Line:
+                  {{ intern.data[3].last_date | date : "mediumDate" }}</small
                 >
               </div>
             </div>
@@ -524,15 +569,17 @@
               <div class="col-sm-12 col-md-8 d-flex align-items-center">
                 <img
                   class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-5.jpg"
+                  src="assets/img/com-logo-4.jpg"
                   alt=""
                   style="width: 80px; height: 80px"
                 />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Wordpress Developer</h5>
+                <div class="text-start text-truncate text-wrap ps-4">
+                  <h5 class="mb-3 dark:text-white">
+                    {{ intern.data[4].title }}
+                  </h5>
                   <span class="text-truncate me-3"
                     ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
+                    >{{ intern.data[4].address }}</span
                   >
                   <span class="text-truncate me-3"
                     ><i class="far fa-clock text-secondary me-2"></i>8h -
@@ -547,16 +594,23 @@
                   <a class="btn btn-light btn-square me-3" href=""
                     ><i class="far fa-heart text-secondary"></i
                   ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
+                  <button
+                    class="btn btn-outline-secondary"
+                    href=""
+                    (click)="GetDetailOffer(intern.data[4].id)"
+                  >
+                    Apply Now
+                  </button>
                 </div>
                 <small class="text-truncate"
                   ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
+                  Line:
+                  {{ intern.data[4].last_date | date : "mediumDate" }}</small
                 >
               </div>
             </div>
           </div>
-          <a class="btn btn-secondary py-3 px-5" href=""
+          <a class="btn btn-secondary py-3 px-5" routerLink="list"
             >Browse More internships</a
           >
         </div>
@@ -570,7 +624,7 @@
                   alt=""
                   style="width: 80px; height: 80px"
                 />
-                <div class="text-start ps-4">
+                <div class="text-start text-truncate text-wrap ps-4">
                   <h5 class="mb-3 dark:text-white">Software Engineer</h5>
                   <span class="text-truncate me-3"
                     ><i class="fa fa-map-marker-alt text-secondary me-2"></i
@@ -748,13 +802,7 @@
           </div>
           <a class="btn btn-secondary py-3 px-5" href="">Browse More Interns</a>
         </div>
-
-        <div
-          id="tab-3"
-          class="tab-pane fade show p-0"
-          *ngFor="let intern of allInterns"
-        >
-          {{ intern }}
+        <div id="tab-3" class="tab-pane fade show p-0">
           <div class="internship-item p-4 mb-4">
             <div class="row g-4">
               <div class="col-sm-12 col-md-8 d-flex align-items-center">
@@ -765,11 +813,10 @@
                   style="width: 80px; height: 80px"
                 />
                 <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">{{ intern.title }}</h5>
+                  <h5 class="mb-3 dark:text-white"></h5>
                   <span class="text-truncate me-3"
                     ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >{{ intern.address }}</span
-                  >
+                  ></span>
                   <span class="text-truncate me-3"
                     ><i class="far fa-clock text-secondary me-2"></i>8h -
                     18h</span

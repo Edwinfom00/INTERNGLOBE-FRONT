@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule, DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './pages/navbar/app-routing.module';
 import { AppComponent } from './app.component';
@@ -58,6 +59,7 @@ import { CompanyComponent } from './pages/company/company.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    CommonModule,
     CarouselModule,
     AlertModule.forRoot(),
     ButtonsModule,
@@ -73,7 +75,7 @@ import { CompanyComponent } from './pages/company/company.component';
     HttpClientModule,
     TranslateModule.forRoot(),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

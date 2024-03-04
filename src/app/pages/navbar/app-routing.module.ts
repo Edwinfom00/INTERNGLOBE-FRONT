@@ -12,6 +12,7 @@ import { RegisterComponent } from '../register/register.component';
 import { PostComponent } from '../post/post.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { CompanyProfileComponent } from '../company-profile/company-profile.component';
+import { CompanyComponent } from '../company/company.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
     component: AboutComponent,
   },
   {
-    path: 'intershipdetails',
+    path: 'intershipdetails/:id',
     component: InternshipdetailsComponent,
   },
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'companyprofile',
     component: CompanyProfileComponent,
+  },
+  {
+    path: 'test',
+    component: CompanyComponent,
   },
 ];
 
