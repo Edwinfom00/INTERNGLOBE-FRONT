@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-internshipdetails',
@@ -18,11 +19,16 @@ export class InternshipdetailsComponent implements OnInit {
 
   detailedInternData: any;
 
-  constructor(private route: ActivatedRoute, private httpclient: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private httpclient: HttpClient,
+    private datepipe: DatePipe
+  ) {}
   ngOnInit(): void {
     const internId = this.route.snapshot.params['id'];
     this.GetDetailOffer(internId);
   }
+  date: Date = new Date();
 
   GetDetailOffer(IntenrId: number) {
     this.httpclient

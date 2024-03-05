@@ -153,4 +153,22 @@ export class HomeComponent implements OnInit {
         this.route.navigate(['/intershipdetails', IntenrId]);
       });
   }
+  formAdd = {
+    id: '',
+  };
+
+  AddToFavorite(IntenrId: number) {
+    this.httpclient
+      .post(
+        `http://localhost:8000/api/interns/favorite/${IntenrId}`,
+        this.formAdd,
+        {
+          headers: this.getHeaders(),
+        }
+      )
+      .subscribe((res) => {
+        console.log(res);
+        alert('Added Succefully');
+      });
+  }
 }

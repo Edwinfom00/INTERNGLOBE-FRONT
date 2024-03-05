@@ -33,22 +33,27 @@
             alt=""
             style="width: 80px; height: 80px"
           />
-          <div class="text-start ps-4">
-            <h3 class="mb-3"></h3>
+          <div
+            class="text-start ps-4"
+            *ngFor="let intern of detailedInternData"
+          >
+            <h3 class="mb-3">{{ intern[1].title }}</h3>
             <span class="text-truncate me-3"
-              ><i class="fa fa-map-marker-alt text-primary me-2"></i
-            ></span>
+              ><i class="fa fa-map-marker-alt text-wrap text-secondary me-2">{{
+                intern[1].address
+              }}</i></span
+            >
             <span class="text-truncate me-3"
               ><i class="far fa-clock text-primary me-2"></i>8h - 18h</span
             >
           </div>
         </div>
 
-        <div class="mb-5">
+        <div class="mb-5" *ngFor="let intern of detailedInternData">
           <h4 class="mb-3">Internship description</h4>
-          <p></p>
+          <p>{{ intern[1].description }}</p>
           <h4 class="mb-3">Responsibility</h4>
-          <p></p>
+          <p>{{ intern[1].roles }}</p>
           <ul class="list-unstyled">
             <li>
               <i class="fa fa-angle-right text-secondary me-2"></i>Dolor justo
@@ -134,10 +139,13 @@
                   class="form-control"
                   rows="5"
                   placeholder="Coverletter"
-                ></textarea>
+                >
+                <input type="file"  name="" id="">
+              </textarea
+                >
               </div>
               <div class="col-12">
-                <button class="btn btn-secondary w-100" type="submit">
+                <button class="btn btn-outline-secondary w-100" type="submit">
                   Apply Now
                 </button>
               </div>
@@ -146,7 +154,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-lg-4" *ngFor="let intern of detailedInternData">
         <div
           class="bg-light rounded p-5 mb-4 wow slideInUp"
           data-wow-delay="0.1s"
@@ -154,7 +162,7 @@
           <h4 class="mb-4">Intern Summery</h4>
           <p>
             <i class="fa fa-angle-right text-secondary me-2"></i>Published On:
-            01 Jan, 2045
+            {{ intern[1].created_at | date : "mediumDate" }}
           </p>
           <p>
             <i class="fa fa-angle-right text-secondary me-2"></i>Vacancy: 123
@@ -165,11 +173,12 @@
             Nature: Full Time
           </p>
           <p>
-            <i class="fa fa-angle-right text-secondary me-2"></i>Location: Doula
+            <i class="fa fa-angle-right text-secondary me-2"></i>Location:
+            {{ intern[1].position }}
           </p>
           <p class="m-0">
-            <i class="fa fa-angle-right text-secondary me-2"></i>Date Line: 01
-            Jan, 2045
+            <i class="fa fa-angle-right text-secondary me-2"></i>Date Line:
+            {{ intern[1].last_date }}
           </p>
         </div>
         <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">

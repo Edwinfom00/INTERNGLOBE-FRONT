@@ -384,11 +384,11 @@
                   alt=""
                   style="width: 80px; height: 80px"
                 />
-                <div class="text-start ps-4">
+                <div class="text-start text-truncate text-wrap ps-4">
                   <h5 class="mb-3 dark:text-white">
                     {{ intern.data[0].title }}
                   </h5>
-                  <span class="text-truncate me-3"
+                  <span class="me-3"
                     ><i class="fa fa-map-marker-alt text-secondary me-2"></i
                     >{{ intern.data[0].address }}</span
                   >
@@ -402,9 +402,12 @@
                 class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
               >
                 <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
+                  <button
+                    class="btn btn-light btn-square me-3"
+                    (click)="AddToFavorite(intern.data[0].id)"
+                  >
+                    <i class="far fa-heart text-secondary"></i>
+                  </button>
                   <form action="">
                     <button
                       type="submit"
@@ -451,9 +454,12 @@
                 class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
               >
                 <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
+                  <button
+                    class="btn btn-light btn-square me-3"
+                    (click)="AddToFavorite(intern.data[1].id)"
+                  >
+                    <i class="far fa-heart text-secondary"></i>
+                  </button>
                   <button
                     class="btn btn-outline-secondary"
                     type="submit"
@@ -498,9 +504,12 @@
                 class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
               >
                 <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
+                  <button
+                    class="btn btn-light btn-square me-3"
+                    (click)="AddToFavorite(intern.data[2].id)"
+                  >
+                    <i class="far fa-heart text-secondary"></i>
+                  </button>
                   <button
                     type="submit"
                     class="btn btn-outline-secondary"
@@ -545,9 +554,12 @@
                 class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
               >
                 <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
+                  <button
+                    class="btn btn-light btn-square me-3"
+                    (click)="AddToFavorite(intern.data[3].id)"
+                  >
+                    <i class="far fa-heart text-secondary"></i>
+                  </button>
                   <button
                     class="btn btn-outline-secondary"
                     href=""
@@ -591,9 +603,12 @@
                 class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
               >
                 <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
+                  <button
+                    class="btn btn-light btn-square me-3"
+                    (click)="AddToFavorite(intern.data[4].id)"
+                  >
+                    <i class="far fa-heart text-secondary"></i>
+                  </button>
                   <button
                     class="btn btn-outline-secondary"
                     href=""
