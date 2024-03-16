@@ -13,6 +13,7 @@ import { PostComponent } from '../post/post.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { CompanyProfileComponent } from '../company-profile/company-profile.component';
 import { CompanyComponent } from '../company/company.component';
+import { CategoryaddComponent } from '../categoryadd/categoryadd.component';
 
 const routes: Routes = [
   {
@@ -64,8 +65,12 @@ const routes: Routes = [
     component: CompanyProfileComponent,
   },
   {
-    path: 'test',
+    path: 'company',
     component: CompanyComponent,
+  },
+  {
+    path: 'addcategory',
+    component: CategoryaddComponent,
   },
 ];
 

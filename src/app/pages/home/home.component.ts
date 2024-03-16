@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
+import { InternServiceService } from './service/intern-service.service';
 
 // interface Intern {
 //   user_id: string;
@@ -46,11 +47,14 @@ export class HomeComponent implements OnInit {
     private translateService: TranslateService,
     private httpclient: HttpClient,
     private route: Router,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private internsService: InternServiceService
   ) {
     effect(() => {
       window.localStorage.setItem('darkMode', JSON.stringify(this.darkMode()));
     });
+    this.translateService.setDefaultLang('en');
+    this.translateService.use(localStorage.getItem('lang') || 'en');
   }
 
   // allInterns: Intern[] = []; // ca c'est mon tableau pour afficher toutes les offres
@@ -67,6 +71,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // this.fetchIntern(); // grace a ceci ca s'applique automatiquement
     this.NewFetchIntern();
+    this.GetCategory();
   }
 
   onInternFetch() {
@@ -170,5 +175,40 @@ export class HomeComponent implements OnInit {
         console.log(res);
         alert('Added Succefully');
       });
+  }
+
+  Data: any[] = [];
+  GetCategory() {
+    this.httpclient
+      .get('http://localhost:8000/api/category', {
+        headers: this.getHeaders(),
+      })
+      .subscribe((res: any) => {
+        console.log(res);
+        this.Data = res;
+      });
+  }
+  interns: any[] = [];
+  searchInterns(
+    title: string,
+    type: string,
+    category: string,
+    address: string
+  ) {
+    const filters = { title, type, category_id: category, address };
+    this.internsService.getAllInterns(filters).subscribe(
+      (response) => {
+        if (response.interns.length === 0) {
+          this.route.navigateByUrl('error'); // Remplacez par le chemin de votre page 404
+        } else {
+          this.interns = response.interns;
+        }
+      },
+      (error) => {
+        // Gestion des erreurs ici
+        console.error('Erreur lors de la récupération des Stages:', error);
+        this.route.navigateByUrl('error');
+      }
+    );
   }
 }

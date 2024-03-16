@@ -106,7 +106,7 @@
           </ul>
         </div>
 
-        <div class="">
+        <div class="" *ngFor="let intern of detailedInternData">
           <h4 class="mb-4">Apply For The Internship</h4>
           <form>
             <div class="row g-3">
@@ -128,24 +128,21 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Portfolio Website"
+                  placeholder="Your Phone Number"
                 />
               </div>
               <div class="col-12 col-sm-6">
                 <input type="file" class="form-control bg-white" />
               </div>
               <div class="col-12">
-                <textarea
-                  class="form-control"
-                  rows="5"
-                  placeholder="Coverletter"
-                >
-                <input type="file"  name="" id="">
-              </textarea
-                >
+                <input type="file" class="form-control bg-white" />
               </div>
               <div class="col-12">
-                <button class="btn btn-outline-secondary w-100" type="submit">
+                <button
+                  class="btn btn-outline-secondary w-100"
+                  (click)="ApplyIntern(intern[1].id)"
+                  type="submit"
+                >
                   Apply Now
                 </button>
               </div>
@@ -170,7 +167,7 @@
           </p>
           <p>
             <i class="fa fa-angle-right text-secondary me-2"></i>Internship
-            Nature: Full Time
+            Nature: {{ intern[1].type }}
           </p>
           <p>
             <i class="fa fa-angle-right text-secondary me-2"></i>Location:

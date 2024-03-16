@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -16,6 +16,14 @@ export class InternshipdetailsComponent implements OnInit {
     { link: 'Privacy Policy' },
     { link: 'Terms & Condition' },
   ];
+
+  getHeaders(): HttpHeaders {
+    const accessToken = localStorage.getItem('access_token');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    });
+  }
 
   detailedInternData: any;
 
@@ -36,6 +44,23 @@ export class InternshipdetailsComponent implements OnInit {
       .subscribe((response: any) => {
         this.detailedInternData = Object.entries(response);
         console.log(this.detailedInternData);
+      });
+  }
+
+  FormData = {
+    user_id: '',
+  };
+  ApplyIntern(IntenrId: number) {
+    this.httpclient
+      .post(
+        `http://localhost:8000/api/applications/${IntenrId}`,
+        this.FormData,
+        {
+          headers: this.getHeaders(),
+        }
+      )
+      .subscribe((res: any) => {
+        console.log(res);
       });
   }
 }

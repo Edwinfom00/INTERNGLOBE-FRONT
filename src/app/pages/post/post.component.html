@@ -57,105 +57,209 @@
           id="createInternForm"
           name="createInternForm"
           (ngSubmit)="PostIntern()"
+          #createForm="ngForm"
+          novalidate
         >
           <div class="card border-0 shadow mb-4">
             <div class="card-body card-form p-4">
               <h3 class="fs-4 mb-1">Intern Details</h3>
               <div class="row">
                 <div class="col-md-6 mb-4">
-                  <label for="" class="mb-2"
-                    >Title<span class="req">*</span></label
-                  >
+                  <label for="title" class="mb-2">Title*</label>
                   <input
                     type="text"
-                    placeholder="Intern Title"
                     id="title"
                     name="title"
+                    placeholder="Intern Title"
                     class="form-control"
                     [(ngModel)]="FormData.title"
+                    #titleVar="ngModel"
+                    required
+                    [class.is-invalid]="
+                      titleVar.invalid && (titleVar.dirty || titleVar.touched)
+                    "
                   />
-                  <p></p>
+                  <div
+                    *ngIf="
+                      titleVar.invalid && (titleVar.dirty || titleVar.touched)
+                    "
+                    class="text-danger"
+                  >
+                    Le Titre est requis
+                  </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                  <label for="" class="mb-2"
-                    >Category<span class="req">*</span></label
-                  >
+                  <label for="category" class="mb-2">Category*</label>
                   <select
-                    name="category_id"
                     id="category"
-                    class="form-control"
+                    name="category_id"
+                    class="form-control bg-white"
                     [(ngModel)]="FormData.category_id"
+                    #categoryVar="ngModel"
+                    required
+                    [class.is-invalid]="
+                      categoryVar.invalid &&
+                      (categoryVar.dirty || categoryVar.touched)
+                    "
                   >
                     <option value="">Select a Category</option>
+                    <!-- Options are populated here -->
                   </select>
-                  <p></p>
+                  <div
+                    *ngIf="
+                      categoryVar.invalid &&
+                      (categoryVar.dirty || categoryVar.touched)
+                    "
+                    class="text-danger"
+                  >
+                    Veuillez sélectionner une catégorie.
+                  </div>
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="col-md-6 mb-4">
-                  <label for="" class="mb-2"
-                    >Intern Type<span class="req">*</span></label
-                  >
-                  <select
-                    name="jobType"
-                    id="jobType"
-                    class="form-select"
-                    [(ngModel)]="FormData.type"
-                  >
-                    <option value="">Select Intern Type</option>
-                  </select>
-                  <p></p>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <label for="internType" class="mb-2">Intern Type*</label>
+                    <input
+                      type="text"
+                      id="internType"
+                      name="internType"
+                      placeholder="Enter Intern Type"
+                      class="form-control bg-white"
+                      [(ngModel)]="FormData.type"
+                      #internType="ngModel"
+                      required
+                      [class.is-invalid]="
+                        internType.invalid &&
+                        (internType.dirty || internType.touched)
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        internType.invalid &&
+                        (internType.dirty || internType.touched)
+                      "
+                      class="text-danger"
+                    >
+                      Le type de stage est requis.
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <label for="address" class="mb-2"
+                      >Address<span class="req">*</span></label
+                    >
+                    <input
+                      type="text"
+                      placeholder="Address"
+                      id="address"
+                      name="address"
+                      class="form-control"
+                      [(ngModel)]="FormData.address"
+                      #addressField="ngModel"
+                      required
+                      maxlength="50"
+                      [class.is-invalid]="
+                        addressField.invalid &&
+                        (addressField.dirty || addressField.touched)
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        addressField.invalid &&
+                        (addressField.dirty || addressField.touched)
+                      "
+                      class="text-danger"
+                    >
+                      <div *ngIf="addressField.errors['required']">
+                        L'adresse est requise
+                      </div>
+                      <div *ngIf="addressField.errors['maxlength']">
+                        L’adresse ne peut pas contenir plus de 50 caractères
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                  <label for="" class="mb-2"
-                    >Addresse<span class="req">*</span></label
-                  >
-                  <input
-                    type="text"
-                    placeholder="Address"
-                    id="address"
-                    name="address"
-                    class="form-control"
-                    [(ngModel)]="FormData.address"
-                  />
-                  <p></p>
-                </div>
-              </div>
 
-              <div class="row">
+                <div class="row">
+                  <div class="col-12 mb-4">
+                    <!-- Ensure correct column width class for consistency -->
+                    <label for="location" class="mb-2"
+                      >Location<span class="req">*</span></label
+                    >
+                    <input
+                      type="text"
+                      placeholder="Location"
+                      id="location"
+                      name="location"
+                      class="form-control"
+                      [(ngModel)]="FormData.position"
+                      #locationField="ngModel"
+                      required
+                      [maxlength]="50"
+                      [class.is-invalid]="
+                        locationField.invalid &&
+                        (locationField.dirty || locationField.touched)
+                      "
+                    />
+                    <!-- Validation Error Messages -->
+                    <div
+                      *ngIf="
+                        locationField.invalid &&
+                        (locationField.dirty || locationField.touched)
+                      "
+                      class="text-danger"
+                    >
+                      <p *ngIf="locationField.errors['required']">
+                        L'emplacement est requis.
+                      </p>
+                      <p *ngIf="locationField.errors['maxlength']">
+                        L'emplacement ne peut pas contenir plus de 50
+                        caractères.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="mb-4">
-                  <label for="" class="mb-2"
-                    >Location<span class="req">*</span></label
+                  <label for="description" class="mb-2"
+                    >Description<span class="req">*</span></label
                   >
-                  <input
-                    type="text"
-                    placeholder="Location"
-                    id="location"
-                    name="location"
-                    class="form-control"
-                    [(ngModel)]="FormData.position"
-                  />
-                  <p></p>
+                  <textarea
+                    class="form-control summernote"
+                    name="description"
+                    id="description"
+                    cols="5"
+                    rows="5"
+                    placeholder="Description"
+                    [(ngModel)]="FormData.description"
+                    #descriptionField="ngModel"
+                    required
+                    [minlength]="30"
+                    [maxlength]="5000"
+                    [class.is-invalid]="
+                      descriptionField.invalid &&
+                      (descriptionField.dirty || descriptionField.touched)
+                    "
+                  ></textarea>
+                  <div
+                    *ngIf="
+                      descriptionField.invalid &&
+                      (descriptionField.dirty || descriptionField.touched)
+                    "
+                    class="text-danger"
+                  >
+                    <p *ngIf="descriptionField.errors['required']">
+                      Une description est requise.
+                    </p>
+                    <p *ngIf="descriptionField.errors['minlength']">
+                      La description doit comporter au moins 30 caractères.
+                    </p>
+                    <p *ngIf="descriptionField.errors['maxlength']">
+                      La description ne peut pas contenir plus de 5 000
+                      caractères.
+                    </p>
+                  </div>
                 </div>
-              </div>
-
-              <div class="mb-4">
-                <label for="" class="mb-2"
-                  >Description<span class="req">*</span></label
-                >
-                <textarea
-                  class="form-control summernote"
-                  name="description"
-                  id="description"
-                  cols="5"
-                  rows="5"
-                  placeholder="Description"
-                  [(ngModel)]="FormData.description"
-                ></textarea>
-                <p></p>
-              </div>
-              <!-- <div class="mb-4">
+                <!-- <div class="mb-4">
                 <label for="" class="mb-2">Benefits</label>
                 <textarea
                   class="form-control summernote"
@@ -177,83 +281,134 @@
                   placeholder="Responsibility"
                 ></textarea>
               </div> -->
-              <div class="mb-4">
-                <label for="" class="mb-2">Role*</label>
-                <textarea
-                  class="form-control"
-                  name="roles"
-                  id="role"
-                  cols="5"
-                  rows="5"
-                  placeholder="role"
-                  [(ngModel)]="FormData.roles"
-                ></textarea>
-              </div>
-              <div class="mb-4">
-                <label for="" class="mb-2">Last Date</label>
-                <input
-                  type="date"
-                  placeholder="Last Date"
-                  name="last_date"
-                  class="form-control"
-                  [(ngModel)]="FormData.last_date"
-                />
-              </div>
-              <div class="mb-4">
-                <label for="" class="mb-2">Keywords</label>
-                <input
-                  type="text"
-                  placeholder="keywords"
-                  id="keywords"
-                  name="keywords"
-                  class="form-control"
-                />
-              </div>
-
-              <h3 class="fs-4 mb-1 mt-5 border-top pt-5">Company Details</h3>
-
-              <div class="row">
-                <div class="mb-4 col-md-6">
-                  <label for="" class="mb-2"
-                    >Name<span class="req">*</span></label
+                <div class="mb-4">
+                  <label for="role" class="mb-2">Role*</label>
+                  <textarea
+                    class="form-control"
+                    name="roles"
+                    id="role"
+                    cols="5"
+                    rows="5"
+                    placeholder="Role description"
+                    [(ngModel)]="FormData.roles"
+                    #rolesField="ngModel"
+                    required
+                    [minlength]="30"
+                    [maxlength]="800"
+                    [class.is-invalid]="
+                      rolesField.invalid &&
+                      (rolesField.dirty || rolesField.touched)
+                    "
+                  ></textarea>
+                  <div
+                    *ngIf="
+                      rolesField.invalid &&
+                      (rolesField.dirty || rolesField.touched)
+                    "
+                    class="text-danger"
                   >
-                  <input
-                    type="text"
-                    placeholder="Company Name"
-                    id="company_name"
-                    name="company_name"
-                    class="form-control"
-                  />
-                  <p></p>
+                    <p *ngIf="rolesField.errors['required']">
+                      Une description du rôle est requise.
+                    </p>
+                    <p *ngIf="rolesField.errors['minlength']">
+                      La description du rôle doit comporter au moins 30
+                      caractères.
+                    </p>
+                    <p *ngIf="rolesField.errors['maxlength']">
+                      La description du rôle ne peut pas contenir plus de 800
+                      caractères.
+                    </p>
+                  </div>
                 </div>
 
-                <div class="mb-4 col-md-6">
-                  <label for="" class="mb-2">Location</label>
+                <div class="mb-4">
+                  <label for="lastDate" class="mb-2">Last Date*</label>
+                  <input
+                    type="date"
+                    placeholder="Last Date"
+                    id="lastDate"
+                    name="last_date"
+                    class="form-control"
+                    [(ngModel)]="FormData.last_date"
+                    #lastDateField="ngModel"
+                    required
+                    [class.is-invalid]="
+                      lastDateField.invalid &&
+                      (lastDateField.dirty || lastDateField.touched)
+                    "
+                  />
+                  <div
+                    *ngIf="
+                      lastDateField.invalid &&
+                      (lastDateField.dirty || lastDateField.touched)
+                    "
+                    class="text-danger"
+                  >
+                    <p *ngIf="lastDateField.errors['required']">
+                      La date limite est requise
+                    </p>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <label for="" class="mb-2">Keywords</label>
                   <input
                     type="text"
-                    placeholder="Location"
-                    id="company_location"
-                    name="company_location"
+                    placeholder="keywords"
+                    id="keywords"
+                    name="keywords"
+                    class="form-control"
+                  />
+                </div>
+
+                <h3 class="fs-4 mb-1 mt-5 border-top pt-5">Company Details</h3>
+
+                <div class="row">
+                  <div class="mb-4 col-md-6">
+                    <label for="" class="mb-2"
+                      >Name<span class="req">*</span></label
+                    >
+                    <input
+                      type="text"
+                      placeholder="Company Name"
+                      id="company_name"
+                      name="company_name"
+                      class="form-control"
+                    />
+                    <p></p>
+                  </div>
+
+                  <div class="mb-4 col-md-6">
+                    <label for="" class="mb-2">Location</label>
+                    <input
+                      type="text"
+                      placeholder="Location"
+                      id="company_location"
+                      name="company_location"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label for="" class="mb-2">Website</label>
+                  <input
+                    type="text"
+                    placeholder="Website"
+                    id="website"
+                    name="website"
                     class="form-control"
                   />
                 </div>
               </div>
-
-              <div class="mb-4">
-                <label for="" class="mb-2">Website</label>
-                <input
-                  type="text"
-                  placeholder="Website"
-                  id="website"
-                  name="website"
-                  class="form-control"
-                />
+              <div class="card-footer p-4">
+                <button
+                  type="submit"
+                  class="btn btn-outline-secondary"
+                  [disabled]="!createForm.valid"
+                >
+                  Save Intern
+                </button>
               </div>
-            </div>
-            <div class="card-footer p-4">
-              <button type="submit" class="btn btn-outline-secondary">
-                Save Intern
-              </button>
             </div>
           </div>
         </form>

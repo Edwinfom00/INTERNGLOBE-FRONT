@@ -35,6 +35,7 @@ import { PostComponent } from './pages/post/post.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CompanyProfileComponent } from './pages/company-profile/company-profile.component';
 import { CompanyComponent } from './pages/company/company.component';
+import { CategoryaddComponent } from './pages/categoryadd/categoryadd.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CompanyComponent } from './pages/company/company.component';
     ProfileComponent,
     CompanyProfileComponent,
     CompanyComponent,
+    CategoryaddComponent,
   ],
   imports: [
     BrowserModule,

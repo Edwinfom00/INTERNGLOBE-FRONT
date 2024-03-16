@@ -34,7 +34,7 @@ export class LoginComponent {
   }
   LoginWithGoogle() {
     this.httpClient
-      .post('http://localhost:8000/api/login/google', this.formData)
+      .get('http://localhost:8000/api/auth/google/redirect')
       .subscribe((readData: any) => {
         console.log(readData);
 

@@ -171,42 +171,78 @@
   style="padding: 35px"
 >
   <div class="container">
-    <div class="row g-2">
-      <div class="col-md-10">
-        <div class="row g-2">
-          <div class="col-md-4">
-            <input
-              type="text"
-              class="form-control border-0"
-              placeholder="Keyword"
-            />
-          </div>
-          <div class="col-md-4">
-            <select class="form-select border-0">
-              <option *ngFor="let otpion of option">
-                {{ otpion.emplacement }}
-              </option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <select class="form-select border-0">
-              <option *ngFor="let Location of option2">
-                {{ Location.location }}
-              </option>
-            </select>
-          </div>
-        </div>
+    <form #searchForm="ngForm" class="row gap-1 form-group">
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control border-outline-seconday"
+          ngModel
+          name="title"
+          #title="ngModel"
+          placeholder="Titre"
+        />
       </div>
-      <div class="col-md-2">
-        <button class="btn btn-light text-secondary w-100">Search</button>
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control border-0"
+          ngModel
+          name="type"
+          #type="ngModel"
+          placeholder="Type"
+        />
       </div>
-    </div>
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control border-0"
+          ngModel
+          name="category"
+          #category="ngModel"
+          placeholder="Catégorie"
+        />
+      </div>
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control border-0"
+          ngModel
+          name="address"
+          #address="ngModel"
+          placeholder="Adresse"
+        />
+      </div>
+      <div class="col-md-2 gap-2 justify-end">
+        <button
+          class="btn btn-outline-secondary"
+          (click)="
+            searchInterns(
+              title.value,
+              type.value,
+              category.value,
+              address.value
+            )
+          "
+        >
+          Rechercher
+        </button>
+      </div>
+    </form>
   </div>
 </div>
 
 <!-- explore by categoty -->
 <div class="container-xxl py-5 dark:bg-slate-700 dark:text-white">
-  <div class="container">
+  <div *ngIf="interns.length; else noInterns">
+    <div *ngFor="let intern of interns">
+      <!-- Remplacez par la manière dont vous voulez afficher chaque offre de stage -->
+      <p>{{ intern.title }}</p>
+    </div>
+  </div>
+  <ng-template #noInterns>
+    <p>Aucune offre de stage trouvée.</p>
+  </ng-template>
+  <div class="container" *ngFor="let category of Data">
     <h1
       class="text-center mb-5 wow fadeInUp dark:text-white"
       data-wow-delay="0.1s"
@@ -217,56 +253,56 @@
       <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
         <a class="cat-item rounded p-4" href="">
           <i class="fa fa-3x fa-mail-bulk text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">Marketing</h6>
+          <h6 class="mb-3 dark:text-white">{{ category.data[0].name }}</h6>
           <p class="mb-0">123 Vacancy</p>
         </a>
       </div>
       <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
         <a class="cat-item rounded p-4" href="">
           <i class="fa fa-3x fa-headset text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">Customer Service</h6>
+          <h6 class="mb-3 dark:text-white">{{ category.data[1].name }}</h6>
           <p class="mb-0">123 Vacancy</p>
         </a>
       </div>
       <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
         <a class="cat-item rounded p-4" href="">
           <i class="fa fa-3x fa-user-tie text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">Human Resource</h6>
+          <h6 class="mb-3 dark:text-white">{{ category.data[2].name }}</h6>
           <p class="mb-0">123 Vacancy</p>
         </a>
       </div>
       <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
         <a class="cat-item rounded p-4" href="">
           <i class="fa fa-3x fa-tasks text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">Project Management</h6>
+          <h6 class="mb-3 dark:text-white">{{ category.data[3].name }}</h6>
           <p class="mb-0">123 Vacancy</p>
         </a>
       </div>
       <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
         <a class="cat-item rounded p-4" href="">
           <i class="fa fa-3x fa-chart-line text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">Business Development</h6>
+          <h6 class="mb-3 dark:text-white">{{ category.data[4].name }}</h6>
           <p class="mb-0">123 Vacancy</p>
         </a>
       </div>
       <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
         <a class="cat-item rounded p-4" href="">
           <i class="fa fa-3x fa-hands-helping text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">Sales & Communication</h6>
+          <h6 class="mb-3 dark:text-white">{{ category.data[5].name }}</h6>
           <p class="mb-0">123 Vacancy</p>
         </a>
       </div>
       <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
         <a class="cat-item rounded p-4" href="">
           <i class="fa fa-3x fa-book-reader text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">Teaching & Education</h6>
+          <h6 class="mb-3 dark:text-white">{{ category.data[6].name }}</h6>
           <p class="mb-0">123 Vacancy</p>
         </a>
       </div>
       <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
         <a class="cat-item rounded p-4" href="">
           <i class="fa fa-3x fa-drafting-compass text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">Design & Creative</h6>
+          <h6 class="mb-3 dark:text-white">{{ category.data[7].name }}</h6>
           <p class="mb-0">123 Vacancy</p>
         </a>
       </div>
@@ -323,7 +359,9 @@
           <i class="fa fa-check text-secondary me-3"></i>
           Clita duo justo magna dolore erat amet
         </p>
-        <a class="btn btn-secondary py-3 px-5 mt-3" href=""> Read More </a>
+        <a class="btn btn-secondary py-3 px-5 mt-3" routerLink="about">
+          Read More
+        </a>
       </div>
     </div>
   </div>

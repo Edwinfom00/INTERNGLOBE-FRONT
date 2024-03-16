@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 gap-3">
+      <form action="" (ngSubmit)="AddCategory()">
+        <div class="">
+          <label for="" class="mb-2"
+            >Add Category<span class="req">*</span></label
+          >
+          <input
+            type="text"
+            placeholder="Name"
+            name="name"
+            class="form-control"
+            [(ngModel)]="Formdata.name"
+          />
+        </div>
+        <div class="col-md-2 mt-2">
+          <button type="submit" class="btn btn-outline-secondary">
+            Ajouter
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td>#</td>
+            <td>Nom de la Category</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of Data; let k; of: numbers">
+            <td>{{ i.data[k].id }}</td>
+            <td>{{ i.data[k].name }}</td>
+            <td><i class="fa-solid fa-pencil text-secondary"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

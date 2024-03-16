@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +7,11 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
-  @ViewChild('coverLetterInput')
-  coverLetterInput!: ElementRef<HTMLInputElement>;
-  constructor(private httpclient: HttpClient) {}
+  maxDate: string;
+  constructor(private httpclient: HttpClient) {
+    const today = new Date();
+    this.maxDate = today.toISOString().split('T')[0]; // Format YYYY-MM-DD
+  }
 
   getHeaders(): HttpHeaders {
     const accessToken = localStorage.getItem('access_token');
@@ -31,6 +33,7 @@ export class ProfileComponent {
     bio: '',
     resume: '',
     avatar: '',
+    birthdate: null,
   };
 
   UpdateWritingProfile() {
@@ -48,36 +51,32 @@ export class ProfileComponent {
         this.FormData.dob = '';
         this.FormData.phone = '';
         this.FormData.bio = '';
+        this.FormData.birthdate = null;
       });
   }
 
-  doUpdate(event: Event) {
-    event.preventDefault();
-    this.UpdateCoverLetterProfile(event);
+  selectedFile: File = null;
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
-  UpdateCoverLetterProfile(event: any) {
-    const inputElement = event.target.querySelector('input[type="file"]');
-    if (inputElement.files && inputElement.files.length > 0) {
-      const coverLetter = inputElement.files[0];
-
-      if (coverLetter.type == 'application/pdf') {
-        const formData = new FormData();
-
-        formData.append('cover_letter', coverLetter);
-
-        console.log(formData);
-
-        this.httpclient
-          .put('http://localhost:8000/api/user/profile/coverletter', formData, {
-            headers: this.getHeaders(),
-          })
-          .subscribe((resulData: any) => {
-            console.log(resulData);
-          });
-      } else {
-        alert('Enter PDF file');
-      }
+  UpdateCoverLetterProfile() {
+    if (!this.selectedFile) {
+      console.error('No file selected');
+      return;
     }
+
+    const formData = new FormData();
+    formData.append('cover_letter', this.selectedFile, this.selectedFile.name);
+
+    this.httpclient
+      .put('http://localhost:8000/api/user/profile/coverletter', formData, {
+        headers: this.getHeaders(),
+      })
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.error(error)
+      );
   }
 
   UpdatePassword() {

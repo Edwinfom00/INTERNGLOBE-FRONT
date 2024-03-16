@@ -79,109 +79,226 @@
             id="userForm"
             name="userForm"
             (ngSubmit)="UpdateWritingProfile()"
+            #form="ngForm"
+            novalidate
           >
             <div class="card-body p-4">
               <h3 class="fs-4 mb-1">My Profile</h3>
               <div class="mb-4">
-                <label for="" class="mb-2">Name*</label>
+                <label for="name" class="mb-2">Name*</label>
                 <input
                   type="text"
                   name="name"
                   id="name"
                   placeholder="Enter Name"
                   class="form-control"
-                  value="{{ FormData.name }}"
                   [(ngModel)]="FormData.name"
+                  [class.is-invalid]="
+                    name.invalid && (name.dirty || name.touched)
+                  "
+                  #name="ngModel"
+                  required
                 />
-                <p></p>
+                <div
+                  *ngIf="name.invalid && (name.dirty || name.touched)"
+                  class="text-danger"
+                >
+                  Name is required.
+                </div>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Email*</label>
+                <label for="email" class="mb-2">Email*</label>
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   id="email"
                   placeholder="Enter Email"
                   class="form-control"
-                  value="{{ FormData.email }}"
                   [(ngModel)]="FormData.email"
+                  #email="ngModel"
+                  [class.is-invalid]="
+                    email.invalid && (email.dirty || email.touched)
+                  "
+                  required
+                  email
                 />
-                <p></p>
+                <div
+                  *ngIf="email.invalid && (email.dirty || email.touched)"
+                  class="text-danger"
+                >
+                  <div *ngIf="email.errors['required']">Email is required.</div>
+                  <div *ngIf="email.errors['email']">
+                    Please enter a valid email address.
+                  </div>
+                </div>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Address*</label>
+                <label for="address" class="mb-2">Address*</label>
                 <input
                   type="text"
                   name="address"
                   id="address"
                   placeholder="Address"
                   class="form-control"
-                  value=""
+                  [class.is-invalid]="
+                    address.invalid && (address.dirty || address.touched)
+                  "
                   [(ngModel)]="FormData.address"
+                  #address="ngModel"
+                  required
+                  minlength="10"
+                  maxlength="255"
                 />
+                <div
+                  *ngIf="address.invalid && (address.dirty || address.touched)"
+                  class="text-danger"
+                >
+                  <div *ngIf="address.errors['required']">
+                    Address is required.
+                  </div>
+                  <div *ngIf="address.errors['minlength']">
+                    Address must be at least 10 characters long.
+                  </div>
+                  <div *ngIf="address.errors['maxlength']">
+                    Address cannot be more than 255 characters long.
+                  </div>
+                </div>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Mobile*</label>
+                <label for="mobile" class="mb-2">Mobile*</label>
                 <input
                   type="tel"
                   name="mobile"
                   id="mobile"
                   placeholder="Mobile"
                   class="form-control"
-                  value=""
+                  [class.is-invalid]="
+                    mobile.invalid && (mobile.dirty || mobile.touched)
+                  "
                   [(ngModel)]="FormData.phone"
+                  #mobile="ngModel"
+                  required
+                  pattern="\\d{9}"
                 />
-              </div>
-              <div class="mb-4">
-                <label for="" class="mb-2">Dob*</label>
-                <input
-                  type="date"
-                  name="dob"
-                  id="dob"
-                  placeholder="Mobile"
-                  class="form-control"
-                  value=""
-                  [(ngModel)]="FormData.dob"
-                />
-              </div>
-              <div class="mb-4">
-                <label for="" class="mb-2">gender*</label>
-                <div class="row">
-                  <div class="col-3">
-                    <input
-                      type="radio"
-                      name="genre"
-                      class="form-check-input"
-                      value="mal"
-                      [(ngModel)]="FormData.gender"
-                    />
-                    <label for="" class="mx-2">Mal</label>
-                    <input
-                      type="radio"
-                      name="genre"
-                      class="form-check-input"
-                      value="female"
-                      [(ngModel)]="FormData.gender"
-                    />
-                    <label for="" class="mx-2">Female</label>
+                <div
+                  *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+                  class="text-danger"
+                >
+                  <div *ngIf="mobile.errors['required']">
+                    Mobile number is required.
+                  </div>
+                  <div *ngIf="mobile.errors['pattern']">
+                    Mobile number must be exactly 9 digits long.
                   </div>
                 </div>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Bio*</label>
+                <label for="birthdate" class="mb-2">Birthdate*</label>
+                <input
+                  type="date"
+                  name="dob"
+                  id="dob"
+                  class="form-control"
+                  [class.is-invalid]="
+                    birthdate.invalid && (birthdate.dirty || birthdate.touched)
+                  "
+                  [(ngModel)]="FormData.dob"
+                  #birthdate="ngModel"
+                  required
+                  [max]="maxDate"
+                />
+                <div
+                  *ngIf="
+                    birthdate.invalid && (birthdate.dirty || birthdate.touched)
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="birthdate.errors['required']">
+                    Birthdate is required.
+                  </div>
+                  <div *ngIf="birthdate.errors['max']">
+                    Birthdate must be before today.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label class="mb-2">Gender*</label>
+                <div class="row">
+                  <div class="col-3">
+                    <div class="form-check">
+                      <input
+                        type="radio"
+                        name="gender"
+                        id="male"
+                        class="form-check-input"
+                        value="male"
+                        [(ngModel)]="FormData.gender"
+                        #gender="ngModel"
+                        required
+                      />
+                      <label for="male" class="form-check-label">Male</label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        type="radio"
+                        name="gender"
+                        id="female"
+                        class="form-check-input"
+                        value="female"
+                        [(ngModel)]="FormData.gender"
+                      />
+                      <label for="female" class="form-check-label"
+                        >Female</label
+                      >
+                    </div>
+                    <!-- Apply the is-invalid class to the div below if gender is invalid -->
+                    <div
+                      [class.is-invalid]="
+                        gender.invalid && (gender.dirty || gender.touched)
+                      "
+                      class="invalid-feedback"
+                    >
+                      Please select a gender.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label for="bio" class="mb-2">Bio*</label>
                 <textarea
                   rows="5"
                   cols="5"
                   name="bio"
+                  id="bio"
                   placeholder="Bio"
                   class="form-control"
-                  value=""
+                  [class.is-invalid]="bio.invalid && (bio.dirty || bio.touched)"
                   [(ngModel)]="FormData.bio"
+                  #bio="ngModel"
+                  required
+                  minlength="30"
+                  maxlength="1000"
                 ></textarea>
+                <div
+                  *ngIf="bio.invalid && (bio.dirty || bio.touched)"
+                  class="text-danger"
+                >
+                  <div *ngIf="bio.errors['required']">Bio is required.</div>
+                  <div *ngIf="bio.errors['minlength']">
+                    Bio must be at least 30 characters long.
+                  </div>
+                  <div *ngIf="bio.errors['maxlength']">
+                    Bio cannot be more than 1000 characters long.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="card-footer p-4">
-              <button type="submit" class="btn btn-outline-secondary">
+              <button
+                type="submit"
+                class="btn btn-outline-secondary"
+                [disabled]="!form.valid"
+              >
                 Update
               </button>
             </div>
@@ -230,7 +347,7 @@
           </div>
         </div>
         <div class="card border-0 shadow mb-4">
-          <form action="" (ngSubmit)="doUpdate($event)">
+          <form action="" (submit)="UpdateCoverLetterProfile()">
             <div class="card-body p-4">
               <h3 class="fs-4 mb-1">Document Upload</h3>
               <div class="mb-4">
@@ -239,15 +356,20 @@
                   type="file"
                   name="cover_letter"
                   placeholder="Upload Cover Letter"
-                  class="form-control"
+                  class="form-control bg-white"
+                  (change)="onFileSelected($event)"
                 />
+                <p>
+                  File name:
+                  {{ selectedFile ? selectedFile.name : "No file selected" }}
+                </p>
               </div>
               <div class="mb-4">
                 <label for="" class="mb-2">CV*</label>
                 <input
                   type="file"
                   placeholder="Upload CV"
-                  class="form-control"
+                  class="form-control bg-white"
                 />
               </div>
             </div>
