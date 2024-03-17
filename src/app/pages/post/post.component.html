@@ -97,23 +97,16 @@
                     [(ngModel)]="FormData.category_id"
                     #categoryVar="ngModel"
                     required
-                    [class.is-invalid]="
-                      categoryVar.invalid &&
-                      (categoryVar.dirty || categoryVar.touched)
-                    "
+                    *ngFor="let category of Data"
                   >
-                    <option value="">Select a Category</option>
+                    <option
+                      value="Selectionner Une categorie"
+                      *ngFor="let i of range"
+                    >
+                      {{ category.data[i].name }}
+                    </option>
                     <!-- Options are populated here -->
                   </select>
-                  <div
-                    *ngIf="
-                      categoryVar.invalid &&
-                      (categoryVar.dirty || categoryVar.touched)
-                    "
-                    class="text-danger"
-                  >
-                    Veuillez sélectionner une catégorie.
-                  </div>
                 </div>
 
                 <div class="row">

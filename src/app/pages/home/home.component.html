@@ -14,28 +14,6 @@
   id="carouselExampleCaptions"
   class="carousel slide dark:bg-gray-800 dark:border-gray-700"
 >
-  <!-- <div class="carousel-indicators">
-    <button
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide-to="0"
-      class="active"
-      aria-current="true"
-      aria-label="Slide 1"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide-to="1"
-      aria-label="Slide 2"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide-to="2"
-      aria-label="Slide 3"
-    ></button>
-  </div> -->
   <div class="carousel-inner">
     <div class="carousel-item active">
       <div class="container-fluid p-0">
@@ -50,7 +28,7 @@
                 <div class="row justify-content-start">
                   <div class="col-10 col-lg-8">
                     <h1 class="display-3 text-white animated slideInDown mb-4">
-                      Find The Perfect Internship That You Deserved
+                      Trouvez Le Stage Parfait Que Vous Méritez
                     </h1>
                     <p class="fs-5 fw-medium text-white mb-4 pb-2">
                       Vero elitr justo clita lorem. Ipsum dolor at sed stet sit
@@ -176,7 +154,7 @@
         <input
           type="text"
           class="form-control border-outline-seconday"
-          ngModel
+          [(ngModel)]="searchCriteria.title"
           name="title"
           #title="ngModel"
           placeholder="Titre"
@@ -186,7 +164,7 @@
         <input
           type="text"
           class="form-control border-0"
-          ngModel
+          [(ngModel)]="searchCriteria.type"
           name="type"
           #type="ngModel"
           placeholder="Type"
@@ -196,7 +174,7 @@
         <input
           type="text"
           class="form-control border-0"
-          ngModel
+          [(ngModel)]="searchCriteria.category"
           name="category"
           #category="ngModel"
           placeholder="Catégorie"
@@ -206,24 +184,14 @@
         <input
           type="text"
           class="form-control border-0"
-          ngModel
+          [(ngModel)]="searchCriteria.address"
           name="address"
           #address="ngModel"
           placeholder="Adresse"
         />
       </div>
       <div class="col-md-2 gap-2 justify-end">
-        <button
-          class="btn btn-outline-secondary"
-          (click)="
-            searchInterns(
-              title.value,
-              type.value,
-              category.value,
-              address.value
-            )
-          "
-        >
+        <button class="btn btn-outline-secondary" (click)="searchInterns()">
           Rechercher
         </button>
       </div>
@@ -236,13 +204,13 @@
   <div *ngIf="interns.length; else noInterns">
     <div *ngFor="let intern of interns">
       <!-- Remplacez par la manière dont vous voulez afficher chaque offre de stage -->
-      <p>{{ intern.title }}</p>
+      <p>{{ intern.data[0].title }}</p>
     </div>
   </div>
   <ng-template #noInterns>
     <p>Aucune offre de stage trouvée.</p>
   </ng-template>
-  <div class="container" *ngFor="let category of Data">
+  <div class="container">
     <h1
       class="text-center mb-5 wow fadeInUp dark:text-white"
       data-wow-delay="0.1s"
@@ -250,59 +218,18 @@
       Explore By Category
     </h1>
     <div class="row g-4">
-      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-        <a class="cat-item rounded p-4" href="">
+      <div
+        class="row gap-3 text-center justify-content-center wow fadeInUp"
+        data-wow-delay="0.1s"
+        *ngFor="let category of Data"
+      >
+        <a
+          class="cat-item rounded col-sm-3 p-4"
+          href=""
+          *ngFor="let j of length2"
+        >
           <i class="fa fa-3x fa-mail-bulk text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">{{ category.data[0].name }}</h6>
-          <p class="mb-0">123 Vacancy</p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-        <a class="cat-item rounded p-4" href="">
-          <i class="fa fa-3x fa-headset text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">{{ category.data[1].name }}</h6>
-          <p class="mb-0">123 Vacancy</p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-        <a class="cat-item rounded p-4" href="">
-          <i class="fa fa-3x fa-user-tie text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">{{ category.data[2].name }}</h6>
-          <p class="mb-0">123 Vacancy</p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-        <a class="cat-item rounded p-4" href="">
-          <i class="fa fa-3x fa-tasks text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">{{ category.data[3].name }}</h6>
-          <p class="mb-0">123 Vacancy</p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-        <a class="cat-item rounded p-4" href="">
-          <i class="fa fa-3x fa-chart-line text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">{{ category.data[4].name }}</h6>
-          <p class="mb-0">123 Vacancy</p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-        <a class="cat-item rounded p-4" href="">
-          <i class="fa fa-3x fa-hands-helping text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">{{ category.data[5].name }}</h6>
-          <p class="mb-0">123 Vacancy</p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-        <a class="cat-item rounded p-4" href="">
-          <i class="fa fa-3x fa-book-reader text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">{{ category.data[6].name }}</h6>
-          <p class="mb-0">123 Vacancy</p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-        <a class="cat-item rounded p-4" href="">
-          <i class="fa fa-3x fa-drafting-compass text-secondary mb-4"></i>
-          <h6 class="mb-3 dark:text-white">{{ category.data[7].name }}</h6>
+          <h6 class="mb-3 dark:text-white">{{ category.data[j].name }}</h6>
           <p class="mb-0">123 Vacancy</p>
         </a>
       </div>
@@ -340,7 +267,7 @@
       </div>
       <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
         <h1 class="mb-4 dark:text-white">
-          We Help To Get The Best Internship And Find A Talent
+          Nous vous aidons à obtenir le meilleur stage et à trouver un talent
         </h1>
         <p class="mb-4">
           Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
@@ -349,18 +276,18 @@
         </p>
         <p>
           <i class="fa fa-check text-secondary me-3 dark:text-gray-500"></i>
-          Tempor erat elitr rebum at clita
+          Compréhension de vos besoins
         </p>
         <p>
           <i class="fa fa-check text-secondary me-3"></i>
-          Aliqu diam amet diam et eos
+          Analyse et recherche par nos experts
         </p>
         <p>
           <i class="fa fa-check text-secondary me-3"></i>
-          Clita duo justo magna dolore erat amet
+          Suivi et évaluation lors de vos stages
         </p>
         <a class="btn btn-secondary py-3 px-5 mt-3" routerLink="about">
-          Read More
+          Lire Plus
         </a>
       </div>
     </div>
@@ -373,7 +300,7 @@
       class="text-center mb-5 wow fadeInUp dark:text-white"
       data-wow-delay="0.1s"
     >
-      Intership Listing
+      Liste des Stages
     </h1>
     <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
       <ul
@@ -385,25 +312,7 @@
             data-bs-toggle="pill"
             href="#tab-1"
           >
-            <h6 class="mt-n1 mb-0 dark:text-white">Featured</h6>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="d-flex align-items-center text-start mx-3 pb-3"
-            data-bs-toggle="pill"
-            href="#tab-2"
-          >
-            <h6 class="mt-n1 mb-0 dark:text-white">Full Time</h6>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="d-flex align-items-center text-start mx-3 me-0 pb-3"
-            data-bs-toggle="pill"
-            href="#tab-3"
-          >
-            <h6 class="mt-n1 mb-0 dark:text-white">Part Time</h6>
+            <h6 class="mt-n1 mb-0 dark:text-white">En vedette</h6>
           </a>
         </li>
       </ul>
@@ -413,7 +322,7 @@
           class="tab-pane fade show p-0 active"
           *ngFor="let intern of InternData"
         >
-          <div class="internship-item p-4 mb-4">
+          <div class="internship-item p-4 mb-4" *ngFor="let i of length">
             <div class="row g-4">
               <div class="col-sm-12 col-md-8 d-flex align-items-center">
                 <img
@@ -424,11 +333,11 @@
                 />
                 <div class="text-start text-truncate text-wrap ps-4">
                   <h5 class="mb-3 dark:text-white">
-                    {{ intern.data[0].title }}
+                    {{ intern.data[i].title }}
                   </h5>
                   <span class="me-3"
                     ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >{{ intern.data[0].address }}</span
+                    >{{ intern.data[i].address }}</span
                   >
                   <span class="text-truncate me-3"
                     ><i class="far fa-clock text-secondary me-2"></i>8h -
@@ -442,7 +351,7 @@
                 <div class="d-flex mb-3">
                   <button
                     class="btn btn-light btn-square me-3"
-                    (click)="AddToFavorite(intern.data[0].id)"
+                    (click)="AddToFavorite(intern.data[i].id)"
                   >
                     <i class="far fa-heart text-secondary"></i>
                   </button>
@@ -451,7 +360,7 @@
                       type="submit"
                       class="btn btn-outline-secondary"
                       href=""
-                      (click)="GetDetailOffer(intern.data[0].id)"
+                      (click)="GetDetailOffer(intern.data[i].id)"
                     >
                       Apply Now
                     </button>
@@ -460,706 +369,19 @@
                 <small class="text-truncate"
                   ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
                   Line:
-                  {{ intern.data[0].last_date | date : "mediumDate" }}</small
+                  {{ intern.data[i].last_date | date : "mediumDate" }}</small
                 >
               </div>
             </div>
           </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-2.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start text-truncate text-wrap ps-4">
-                  <h5 class="mb-3 dark:text-white">
-                    {{ intern.data[1].title }}
-                  </h5>
-                  <span class="me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >{{ intern.data[1].address }}</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <button
-                    class="btn btn-light btn-square me-3"
-                    (click)="AddToFavorite(intern.data[1].id)"
-                  >
-                    <i class="far fa-heart text-secondary"></i>
-                  </button>
-                  <button
-                    class="btn btn-outline-secondary"
-                    type="submit"
-                    (click)="GetDetailOffer(intern.data[1].id)"
-                  >
-                    Apply Now
-                  </button>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line:{{
-                    intern.data[1].last_date | date : "mediumDate"
-                  }}</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-3.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 text-truncate text-wrap dark:text-white">
-                    {{ intern.data[2].title }}
-                  </h5>
-                  <span class="text-truncate text-wrap me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >{{ intern.data[2].address }}</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <button
-                    class="btn btn-light btn-square me-3"
-                    (click)="AddToFavorite(intern.data[2].id)"
-                  >
-                    <i class="far fa-heart text-secondary"></i>
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-outline-secondary"
-                    (click)="GetDetailOffer(intern.data[2].id)"
-                  >
-                    Apply Now
-                  </button>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line:{{
-                    intern.data[2].last_date | date : "mediumDate"
-                  }}</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-4.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start text-truncate text-wrap ps-4">
-                  <h5 class="mb-3 dark:text-white">
-                    {{ intern.data[3].title }}
-                  </h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >{{ intern.data[3].address }}</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <button
-                    class="btn btn-light btn-square me-3"
-                    (click)="AddToFavorite(intern.data[3].id)"
-                  >
-                    <i class="far fa-heart text-secondary"></i>
-                  </button>
-                  <button
-                    class="btn btn-outline-secondary"
-                    href=""
-                    (click)="GetDetailOffer(intern.data[3].id)"
-                  >
-                    Apply Now
-                  </button>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line:
-                  {{ intern.data[3].last_date | date : "mediumDate" }}</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-4.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start text-truncate text-wrap ps-4">
-                  <h5 class="mb-3 dark:text-white">
-                    {{ intern.data[4].title }}
-                  </h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >{{ intern.data[4].address }}</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <button
-                    class="btn btn-light btn-square me-3"
-                    (click)="AddToFavorite(intern.data[4].id)"
-                  >
-                    <i class="far fa-heart text-secondary"></i>
-                  </button>
-                  <button
-                    class="btn btn-outline-secondary"
-                    href=""
-                    (click)="GetDetailOffer(intern.data[4].id)"
-                  >
-                    Apply Now
-                  </button>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line:
-                  {{ intern.data[4].last_date | date : "mediumDate" }}</small
-                >
-              </div>
-            </div>
-          </div>
-          <a class="btn btn-secondary py-3 px-5" routerLink="list"
-            >Browse More internships</a
-          >
         </div>
-        <div id="tab-2" class="tab-pane fade show p-0">
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-1.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start text-truncate text-wrap ps-4">
-                  <h5 class="mb-3 dark:text-white">Software Engineer</h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-2.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Marketing Manager</h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-3.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Product Designer</h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-4.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Creative Director</h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-5.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Wordpress Developer</h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <a class="btn btn-secondary py-3 px-5" href="">Browse More Interns</a>
-        </div>
-        <div id="tab-3" class="tab-pane fade show p-0">
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-1.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white"></h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                  ></span>
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-2.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Marketing Manager</h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-3.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Product Designer</h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-4.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Creative Director</h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="internship-item p-4 mb-4">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-5.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start ps-4">
-                  <h5 class="mb-3 dark:text-white">Wordpress Developer</h5>
-                  <span class="text-truncate me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >Doula, Cameroun</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <a class="btn btn-light btn-square me-3" href=""
-                    ><i class="far fa-heart text-secondary"></i
-                  ></a>
-                  <a class="btn btn-secondary" href="">Apply Now</a>
-                </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line: 01 Jan, 2045</small
-                >
-              </div>
-            </div>
-          </div>
-          <a class="btn btn-secondary py-3 px-5" href=""
-            >Browse More internship</a
-          >
-        </div>
+        <a class="btn btn-secondary py-3 px-5" routerLink="list"
+          >Browse More internships</a
+        >
       </div>
     </div>
   </div>
 </div>
-
-<!-- testimonial -->
-<!-- <div id="carouselExampleCaptions" class="carousel slide">
-  <div
-    class="container-xxl carousel-inner py-5 wow fadeInUp"
-    data-wow-delay="0.1s"
-  >
-    <div class="container carousel-item active">
-      <h1 class="text-center mb-5">Our Clients Say!!!</h1>
-      <div class="owl-carousel-item testimonial-carousel">
-        <div class="testimonial-item bg-light rounded p-4">
-          <i class="fa fa-quote-left fa-2x text-secondary mb-3"></i>
-          <p>
-            Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet
-            amet eirmod eos labore diam
-          </p>
-          <div class="d-flex align-items-center">
-            <img
-              class="img-fluid flex-shrink-0 rounded"
-              src="assets/img/1.jpg"
-              style="width: 50px; height: 50px"
-            />
-            <div class="ps-3">
-              <h5 class="mb-1">Client Name</h5>
-              <small>Profession</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="owl-carousel-item">
-        <div class="testimonial-item bg-light rounded p-4">
-          <i class="fa fa-quote-left fa-2x text-secondary mb-3"></i>
-          <p>
-            Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet
-            amet eirmod eos labore diam
-          </p>
-          <div class="d-flex align-items-center">
-            <img
-              class="img-fluid flex-shrink-0 rounded"
-              src="assets/img/2.jpg"
-              style="width: 50px; height: 50px"
-            />
-            <div class="ps-3">
-              <h5 class="mb-1">Client Name</h5>
-              <small>Profession</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="owl-carousel-item">
-        <div class="testimonial-item bg-light rounded p-4">
-          <i class="fa fa-quote-left fa-2x text-secondary mb-3"></i>
-          <p>
-            Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet
-            amet eirmod eos labore diam
-          </p>
-          <div class="d-flex align-items-center">
-            <img
-              class="img-fluid flex-shrink-0 rounded"
-              src="assets/img/2.jpg"
-              style="width: 50px; height: 50px"
-            />
-            <div class="ps-3">
-              <h5 class="mb-1">Client Name</h5>
-              <small>Profession</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="owl-carousel-item">
-        <div class="testimonial-item bg-light rounded p-4">
-          <i class="fa fa-quote-left fa-2x text-secondary mb-3"></i>
-          <p>
-            Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet
-            amet eirmod eos labore diam
-          </p>
-          <div class="d-flex align-items-center">
-            <img
-              class="img-fluid flex-shrink-0 rounded"
-              src="assets/img/2.jpg"
-              style="width: 50px; height: 50px"
-            />
-            <div class="ps-3">
-              <h5 class="mb-1">Client Name</h5>
-              <small>Profession</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!--testimonial-->
-<!-- Back to Top -->
-<!-- <a href="#" class="btn btn-lg btn-secondarybtn-lg-square back-to-top"
-  ><i class="bi bi-arrow-up"></i
-></a> -->
-<!-- <button
-  (click)="changeLanguage('fr')"
-  class="language-button btn btn-secondary"
->
-  Français
-</button>
-<button
-  (click)="changeLanguage('en')"
-  class="language-button btn btn-light text-secondary"
->
-  Anglais
-</button> -->
-<!-- <button (click)="changeLanguage(language.code)">
-  {{ language.name }}
-</button> -->
 
 <div class="dark:bg-slate-700 dark:text-white">
   <button

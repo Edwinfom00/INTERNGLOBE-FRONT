@@ -142,6 +142,8 @@ export class HomeComponent implements OnInit {
   //     });
   // }
 
+  length = Array.from({ length: 5 }, (x, i) => i);
+  length2 = Array.from({ length: 6 }, (x, i) => i);
   NewFetchIntern() {
     this.httpclient
       .get('http://localhost:8000/api/home')
@@ -188,15 +190,10 @@ export class HomeComponent implements OnInit {
         this.Data = res;
       });
   }
+  searchCriteria: any = { title: '', type: '', category: '', address: '' };
   interns: any[] = [];
-  searchInterns(
-    title: string,
-    type: string,
-    category: string,
-    address: string
-  ) {
-    const filters = { title, type, category_id: category, address };
-    this.internsService.getAllInterns(filters).subscribe(
+  searchInterns() {
+    this.internsService.getAllInterns(this.searchCriteria).subscribe(
       (response) => {
         if (response.interns.length === 0) {
           this.route.navigateByUrl('error'); // Remplacez par le chemin de votre page 404

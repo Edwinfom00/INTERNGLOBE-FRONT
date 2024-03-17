@@ -1,12 +1,12 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
   getHeaders(): HttpHeaders {
     const accessToken = localStorage.getItem('access_token');
     return new HttpHeaders({
@@ -14,7 +14,11 @@ export class PostComponent {
       Authorization: `Bearer ${accessToken}`,
     });
   }
+  ngOnInit(): void {
+    this.GetCategory();
+  }
 
+  range = Array.from({ length: 13 }, (x, i) => i);
   FormData = {
     title: '',
     category_id: '',
@@ -48,4 +52,16 @@ export class PostComponent {
   }
 
   DisplayOneIntern() {}
+
+  Data: any[] = [];
+  GetCategory() {
+    this.httpclient
+      .get('http://localhost:8000/api/category', {
+        headers: this.getHeaders(),
+      })
+      .subscribe((res: any) => {
+        console.log(res);
+        this.Data = res;
+      });
+  }
 }
