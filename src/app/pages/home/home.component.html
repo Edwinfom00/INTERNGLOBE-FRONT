@@ -36,9 +36,9 @@
                       rebum sea elitr.
                     </p>
                     <a
-                      href=""
-                      class="btn btn-secondary py-md-3 px-md-5 me-3 animated slideInLeft"
-                      >Search A Internship</a
+                      routerLink="search"
+                      class="btn btn-outline-secondary py-md-3 px-md-5 me-3 animated slideInLeft"
+                      >Rechercher Votre Stage</a
                     >
                     <a
                       href=""
@@ -112,8 +112,8 @@
                       rebum sea elitr.
                     </p>
                     <a
-                      href=""
-                      class="btn btn-secondary py-md-3 px-md-5 me-3 animated slideInLeft"
+                      routerLink="search"
+                      class="btn btn-outline-secondary py-md-3 px-md-5 me-3 animated slideInLeft"
                       >Search A Internship</a
                     >
                     <a
@@ -148,7 +148,7 @@
   data-wow-delay="0.1s"
   style="padding: 35px"
 >
-  <div class="container">
+  <!-- <div class="container">
     <form #searchForm="ngForm" class="row gap-1 form-group">
       <div class="col-md-3">
         <input
@@ -199,17 +199,18 @@
   </div>
 </div>
 
-<!-- explore by categoty -->
+
 <div class="container-xxl py-5 dark:bg-slate-700 dark:text-white">
   <div *ngIf="interns.length; else noInterns">
     <div *ngFor="let intern of interns">
-      <!-- Remplacez par la manière dont vous voulez afficher chaque offre de stage -->
+
       <p>{{ intern.data[0].title }}</p>
     </div>
   </div>
   <ng-template #noInterns>
     <p>Aucune offre de stage trouvée.</p>
-  </ng-template>
+  </ng-template> -->
+
   <div class="container">
     <h1
       class="text-center mb-5 wow fadeInUp dark:text-white"
@@ -418,7 +419,7 @@
         </p>
         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+237 659 336 261</p>
         <p class="mb-2">
-          <i class="fa fa-envelope me-3"></i>edwinfom05@gmail.com
+          <i class="fa fa-envelope me-3"></i>edwinfom05&#64;gmail.com
         </p>
         <div class="d-flex pt-2">
           <a class="btn btn-outline-light btn-social" href=""
@@ -462,9 +463,9 @@
       <div class="row">
         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
           &copy;
-          <a class="border-bottom" href="https://interglobe.com">INTERNGLOBE</a
+          <a class="border-bottom" href="https://internglobe.com">INTERNGLOBE</a
           >, All Right Reserved. Designed By
-          <a class="border-bottom" href="https://interglobe.com">EdwinFom</a>
+          <a class="border-bottom" href="https://internglobe.com">EdwinFom</a>
         </div>
         <div class="col-md-6 text-center text-md-end">
           <div class="footer-menu">

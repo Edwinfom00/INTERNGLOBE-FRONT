@@ -36,6 +36,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { CompanyProfileComponent } from './pages/company-profile/company-profile.component';
 import { CompanyComponent } from './pages/company/company.component';
 import { CategoryaddComponent } from './pages/categoryadd/categoryadd.component';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { CategoryaddComponent } from './pages/categoryadd/categoryadd.component'
     CompanyProfileComponent,
     CompanyComponent,
     CategoryaddComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

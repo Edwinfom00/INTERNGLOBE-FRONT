@@ -58,7 +58,17 @@ export class ProfileComponent {
   selectedFile: File = null;
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+    // this.selectedFile = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      this.selectedFile = event.target.files[0];
+    } else {
+      this.selectedFile = null;
+    }
+  }
+
+  handleSubmit(event: Event) {
+    event.preventDefault();
+    this.UpdateCoverLetterProfile();
   }
   UpdateCoverLetterProfile() {
     if (!this.selectedFile) {
@@ -69,9 +79,13 @@ export class ProfileComponent {
     const formData = new FormData();
     formData.append('cover_letter', this.selectedFile, this.selectedFile.name);
 
+    // Ensure getHeaders() isn't setting Content-Type
+    const headers = this.getHeaders();
+    headers.delete('Content-Type'); // This removes Content-Type header, if it was set
+
     this.httpclient
-      .put('http://localhost:8000/api/user/profile/coverletter', formData, {
-        headers: this.getHeaders(),
+      .post('http://localhost:8000/api/user/profile/coverletter', formData, {
+        headers: headers,
       })
       .subscribe(
         (response) => console.log(response),

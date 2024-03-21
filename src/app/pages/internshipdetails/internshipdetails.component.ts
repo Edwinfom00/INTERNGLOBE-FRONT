@@ -50,17 +50,44 @@ export class InternshipdetailsComponent implements OnInit {
   FormData = {
     user_id: '',
   };
-  ApplyIntern(IntenrId: number) {
+  showSuccessAlert = false;
+  showErrorAlert = false; // Ajout d'une variable pour afficher l'alerte d'erreur
+  errorMessage = ''; // Variable pour stocker le message d'erreur
+
+  ApplyIntern(InternId: number) {
     this.httpclient
       .post(
-        `http://localhost:8000/api/applications/${IntenrId}`,
+        `http://localhost:8000/api/applications/${InternId}`,
         this.FormData,
         {
           headers: this.getHeaders(),
         }
       )
-      .subscribe((res: any) => {
-        console.log(res);
+      .subscribe({
+        next: (res: any) => {
+          this.showSuccessAlert = true;
+          this.showErrorAlert = false; // Assurez-vous de cacher l'alerte d'erreur en cas de succès
+          console.log(res);
+        },
+        error: (error) => {
+          this.showSuccessAlert = false;
+          this.showErrorAlert = true; // Afficher l'alerte d'erreur
+          this.errorMessage = error.error.message; // Stocker le message d'erreur provenant de l'objet d'erreur
+          console.error(error);
+        },
       });
+  }
+  displayError(message: string) {
+    this.errorMessage = message;
+    this.showErrorAlert = true;
+    // Fermez l'alerte après 5 secondes (5000 millisecondes)
+    setTimeout(() => {
+      this.closeErrorAlert();
+    }, 5000);
+  }
+
+  closeErrorAlert() {
+    this.showErrorAlert = false;
+    this.errorMessage = '';
   }
 }

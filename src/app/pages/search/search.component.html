@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 m-auto mt-4">
+      <div class="form-group">
+        <input
+          type="text"
+          (input)="getInternsSearch($event)"
+          class="form-control form-control-lg"
+          placeholder="Rechercher par Titre, Position,Categories,et Adresse"
+        />
+      </div>
+      <div
+        id="tab-1"
+        class="tab-pane fade show p-0 active"
+        *ngFor="let intern of data"
+      >
+        <div class="internship-item p-4 mb-4">
+          <div class="row g-4">
+            <div class="col-sm-12 col-md-8 d-flex align-items-center">
+              <img
+                class="flex-shrink-0 img-fluid border rounded"
+                src="assets/img/com-logo-1.jpg"
+                alt=""
+                style="width: 80px; height: 80px"
+              />
+              <div class="text-start text-truncate text-wrap ps-4">
+                <h5 class="mb-3 dark:text-white">
+                  {{ intern.title }}
+                </h5>
+                <span class="me-3"
+                  ><i class="fa fa-map-marker-alt text-secondary me-2"></i
+                  >{{ intern.address }}</span
+                >
+                <span class="text-truncate me-3"
+                  ><i class="far fa-clock text-secondary me-2"></i>8h -
+                  18h</span
+                >
+              </div>
+            </div>
+            <div
+              class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
+            >
+              <div class="d-flex mb-3">
+                <button class="btn btn-light btn-square me-3">
+                  <i class="far fa-heart text-secondary"></i>
+                </button>
+                <form action="">
+                  <button
+                    type="submit"
+                    class="btn btn-outline-secondary"
+                    href=""
+                  >
+                    Apply Now
+                  </button>
+                </form>
+              </div>
+              <small class="text-truncate"
+                ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
+                Line: {{ intern.last_date | date : "mediumDate" }}</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

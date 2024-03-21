@@ -14,6 +14,7 @@ import { ProfileComponent } from '../profile/profile.component';
 import { CompanyProfileComponent } from '../company-profile/company-profile.component';
 import { CompanyComponent } from '../company/company.component';
 import { CategoryaddComponent } from '../categoryadd/categoryadd.component';
+import { SearchComponent } from '../search/search.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'addcategory',
     component: CategoryaddComponent,
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
   },
 ];
 
