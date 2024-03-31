@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -8,10 +9,19 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
   maxDate: string;
-  constructor(private httpclient: HttpClient) {
+  myForm: FormGroup;
+  constructor(
+    private httpclient: HttpClient,
+    private formBuilder: FormBuilder
+  ) {
     const today = new Date();
     this.maxDate = today.toISOString().split('T')[0]; // Format YYYY-MM-DD
+    this.myForm = this.formBuilder.group({
+      coverLetter: [''],
+    });
   }
+
+  private apiUrl = 'http://localhost:8000/api/user/profile/coverletter'; // Remplacez par l'URL de votre API si nécessaire.
 
   getHeaders(): HttpHeaders {
     const accessToken = localStorage.getItem('access_token');
@@ -20,6 +30,8 @@ export class ProfileComponent {
       Authorization: `Bearer ${accessToken}`,
     });
   }
+
+  files: any;
 
   FormData = {
     name: '',
@@ -57,42 +69,28 @@ export class ProfileComponent {
 
   selectedFile: File = null;
 
-  onFileSelected(event: any) {
-    // this.selectedFile = event.target.files[0];
-    if (event.target.files && event.target.files[0]) {
-      this.selectedFile = event.target.files[0];
-    } else {
-      this.selectedFile = null;
+  onFileSelected(event: any): void {
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile);
+  }
+
+  upload(): void {
+    if (this.selectedFile) {
+      this.updateCoverLetter(this.selectedFile).subscribe({
+        next: (response) => console.log(response),
+        error: (error) => console.error(error),
+      });
     }
   }
 
-  handleSubmit(event: Event) {
-    event.preventDefault();
-    this.UpdateCoverLetterProfile();
+  updateCoverLetter(file: File) {
+    const formData: FormData = new FormData();
+    formData.append('cover_letter', file, file.name);
+    // Envoyer la requête PUT.
+    return this.httpclient.post(this.apiUrl, formData, {
+      headers: this.getHeaders(),
+    });
   }
-  UpdateCoverLetterProfile() {
-    if (!this.selectedFile) {
-      console.error('No file selected');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('cover_letter', this.selectedFile, this.selectedFile.name);
-
-    // Ensure getHeaders() isn't setting Content-Type
-    const headers = this.getHeaders();
-    headers.delete('Content-Type'); // This removes Content-Type header, if it was set
-
-    this.httpclient
-      .post('http://localhost:8000/api/user/profile/coverletter', formData, {
-        headers: headers,
-      })
-      .subscribe(
-        (response) => console.log(response),
-        (error) => console.error(error)
-      );
-  }
-
   UpdatePassword() {
     this.httpclient
       .put('http://localhost:8000/api/user/profile/password', this.FormData, {

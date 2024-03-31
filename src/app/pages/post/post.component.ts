@@ -27,7 +27,12 @@ export class PostComponent implements OnInit {
     roles: '',
     address: '',
     last_date: '',
+    start_date: '',
+    end_date: '',
     description: '',
+    company_name: '',
+    company_website: '',
+    company_location: '',
   };
 
   constructor(private httpclient: HttpClient) {}
@@ -44,10 +49,15 @@ export class PostComponent implements OnInit {
         this.FormData.category_id = '';
         this.FormData.type = '';
         this.FormData.last_date = '';
+        this.FormData.start_date = '';
+        this.FormData.end_date = '';
         this.FormData.address = '';
         this.FormData.description = '';
         this.FormData.roles = '';
         this.FormData.position = '';
+        this.FormData.company_name = '';
+        this.FormData.company_website = '';
+        this.FormData.company_location = '';
       });
   }
 

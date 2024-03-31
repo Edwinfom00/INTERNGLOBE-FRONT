@@ -347,7 +347,7 @@
           </div>
         </div>
         <div class="card border-0 shadow mb-4">
-          <form action="" (submit)="handleSubmit($event)">
+          <form action="">
             <div class="card-body p-4">
               <h3 class="fs-4 mb-1">Document Upload</h3>
               <div class="mb-4">
@@ -357,6 +357,7 @@
                   name="cover_letter"
                   placeholder="Upload Cover Letter"
                   class="form-control bg-white"
+                  formControlName="coverLetter"
                   (change)="onFileSelected($event)"
                 />
                 <p>
@@ -374,7 +375,11 @@
               </div>
             </div>
             <div class="card-footer p-4">
-              <button type="submit" class="btn btn-outline-secondary">
+              <button
+                type="submit"
+                (click)="upload()"
+                class="btn btn-outline-secondary"
+              >
                 Upload
               </button>
             </div>

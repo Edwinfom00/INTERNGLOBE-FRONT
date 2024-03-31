@@ -211,7 +211,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="mb-4">
                   <label for="description" class="mb-2"
                     >Description<span class="req">*</span></label
@@ -226,8 +225,8 @@
                     [(ngModel)]="FormData.description"
                     #descriptionField="ngModel"
                     required
-                    [minlength]="30"
-                    [maxlength]="5000"
+                    [attr.minlength]="30"
+                    [attr.maxlength]="5000"
                     [class.is-invalid]="
                       descriptionField.invalid &&
                       (descriptionField.dirty || descriptionField.touched)
@@ -240,13 +239,13 @@
                     "
                     class="text-danger"
                   >
-                    <p *ngIf="descriptionField.errors['required']">
+                    <p *ngIf="descriptionField.errors?.['required']">
                       Une description est requise.
                     </p>
-                    <p *ngIf="descriptionField.errors['minlength']">
+                    <p *ngIf="descriptionField.errors?.['minlength']">
                       La description doit comporter au moins 30 caractères.
                     </p>
-                    <p *ngIf="descriptionField.errors['maxlength']">
+                    <p *ngIf="descriptionField.errors?.['maxlength']">
                       La description ne peut pas contenir plus de 5 000
                       caractères.
                     </p>
@@ -343,16 +342,61 @@
                   </div>
                 </div>
                 <div class="mb-4">
-                  <label for="" class="mb-2">Keywords</label>
+                  <label for="lastDate" class="mb-2">Start Date*</label>
                   <input
-                    type="text"
-                    placeholder="keywords"
-                    id="keywords"
-                    name="keywords"
+                    type="date"
+                    placeholder="Last Date"
+                    id="lastDate"
+                    name="start_date"
                     class="form-control"
+                    [(ngModel)]="FormData.start_date"
+                    #startDateField="ngModel"
+                    required
+                    [class.is-invalid]="
+                      startDateField.invalid &&
+                      (startDateField.dirty || startDateField.touched)
+                    "
                   />
+                  <div
+                    *ngIf="
+                      startDateField.invalid &&
+                      (startDateField.dirty || startDateField.touched)
+                    "
+                    class="text-danger"
+                  >
+                    <p *ngIf="startDateField.errors['required']">
+                      La date limite est requise
+                    </p>
+                  </div>
                 </div>
-
+                <div class="mb-4">
+                  <label for="lastDate" class="mb-2">End Date*</label>
+                  <input
+                    type="date"
+                    placeholder="Last Date"
+                    id="endDate"
+                    name="end_date"
+                    class="form-control"
+                    [(ngModel)]="FormData.end_date"
+                    #endDateField="ngModel"
+                    required
+                    [class.is-invalid]="
+                      endDateField.invalid &&
+                      (endDateField.dirty || endDateField.touched)
+                    "
+                  />
+                  <div
+                    *ngIf="
+                      endDateField.invalid &&
+                      (endDateField.dirty || endDateField.touched)
+                    "
+                    class="text-danger"
+                  >
+                    <p *ngIf="endDateField.errors['required']">
+                      La date limite est requise
+                    </p>
+                  </div>
+                </div>
                 <h3 class="fs-4 mb-1 mt-5 border-top pt-5">Company Details</h3>
 
                 <div class="row">
@@ -366,8 +410,25 @@
                       id="company_name"
                       name="company_name"
                       class="form-control"
+                      [(ngModel)]="FormData.company_name"
+                      #companyNameField="ngModel"
+                      required
+                      [class.is-invalid]="
+                        companyNameField.invalid &&
+                        (companyNameField.dirty || companyNameField.touched)
+                      "
                     />
-                    <p></p>
+                    <div
+                      *ngIf="
+                        companyNameField.invalid &&
+                        (companyNameField.dirty || companyNameField.touched)
+                      "
+                      class="text-danger"
+                    >
+                      <p *ngIf="companyNameField.errors['required']">
+                        La nom de l'entreprise est requise
+                      </p>
+                    </div>
                   </div>
 
                   <div class="mb-4 col-md-6">
@@ -378,7 +439,27 @@
                       id="company_location"
                       name="company_location"
                       class="form-control"
+                      [(ngModel)]="FormData.company_location"
+                      #companylocationField="ngModel"
+                      required
+                      [class.is-invalid]="
+                        companylocationField.invalid &&
+                        (companylocationField.dirty ||
+                          companylocationField.touched)
+                      "
                     />
+                    <div
+                      *ngIf="
+                        companylocationField.invalid &&
+                        (companylocationField.dirty ||
+                          companylocationField.touched)
+                      "
+                      class="text-danger"
+                    >
+                      <p *ngIf="companylocationField.errors['required']">
+                        La Localisation de l'entreprise est requise
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -390,7 +471,25 @@
                     id="website"
                     name="website"
                     class="form-control"
+                    [(ngModel)]="FormData.company_website"
+                    #companywebsiteField="ngModel"
+                    required
+                    [class.is-invalid]="
+                      companywebsiteField.invalid &&
+                      (companywebsiteField.dirty || companywebsiteField.touched)
+                    "
                   />
+                  <div
+                    *ngIf="
+                      companywebsiteField.invalid &&
+                      (companywebsiteField.dirty || companywebsiteField.touched)
+                    "
+                    class="text-danger"
+                  >
+                    <p *ngIf="companywebsiteField.errors['required']">
+                      Le site Web de l'entreprise est requise
+                    </p>
+                  </div>
                 </div>
               </div>
               <div class="card-footer p-4">
