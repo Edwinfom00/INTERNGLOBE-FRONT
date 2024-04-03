@@ -7,82 +7,72 @@
       Liste des Stages
     </h1>
     <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
-      <ul
-        class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5"
-      >
-        <li class="nav-item">
-          <a
-            class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active"
-            data-bs-toggle="pill"
-            href="#tab-1"
-          >
-            <h6 class="mt-n1 mb-0 dark:text-white">En vedette</h6>
-          </a>
-        </li>
-      </ul>
       <div class="tab-content">
         <div
           id="tab-1"
           class="tab-pane fade show p-0 active"
           *ngFor="let intern of InternData"
         >
-          <div class="internship-item p-4 mb-4" *ngFor="let i of length">
-            <div class="row g-4">
-              <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                <img
-                  class="flex-shrink-0 img-fluid border rounded"
-                  src="assets/img/com-logo-1.jpg"
-                  alt=""
-                  style="width: 80px; height: 80px"
-                />
-                <div class="text-start text-truncate text-wrap ps-4">
-                  <h5 class="mb-3 dark:text-white">
-                    {{ intern.data[i].title }}
-                  </h5>
-                  <span class="me-3"
-                    ><i class="fa fa-map-marker-alt text-secondary me-2"></i
-                    >{{ intern.data[i].address }}</span
-                  >
-                  <span class="text-truncate me-3"
-                    ><i class="far fa-clock text-secondary me-2"></i>8h -
-                    18h</span
-                  >
-                </div>
-              </div>
-              <div
-                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
-              >
-                <div class="d-flex mb-3">
-                  <button
-                    class="btn btn-light btn-square me-3"
-                    (click)="AddToFavorite(intern.data[i].id)"
-                  >
-                    <i class="far fa-heart text-secondary"></i>
-                  </button>
-                  <form action="">
-                    <button
-                      type="submit"
-                      class="btn btn-outline-secondary"
-                      href=""
-                      (click)="GetDetailOffer(intern.data[i].id)"
+          <ng-container *ngFor="let i of length">
+            <div class="internship-item p-4 mb-4" *ngIf="intern">
+              <div class="row g-4">
+                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                  <img
+                    class="flex-shrink-0 img-fluid border rounded"
+                    src="assets/img/com-logo-1.jpg"
+                    alt=""
+                    style="width: 80px; height: 80px"
+                  />
+                  <div class="text-start text-truncate text-wrap ps-4">
+                    <h5 class="mb-3 dark:text-white">
+                      {{ intern.data[i].title }}
+                    </h5>
+                    <span class="me-3"
+                      ><i class="fa fa-map-marker-alt text-secondary me-2"></i
+                      >{{ intern.data[i].address }}</span
                     >
-                      Apply Now
-                    </button>
-                  </form>
+                    <span class="text-truncate me-3"
+                      ><i class="far fa-clock text-secondary me-2"></i>8h -
+                      18h</span
+                    >
+                  </div>
                 </div>
-                <small class="text-truncate"
-                  ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
-                  Line:
-                  {{ intern.data[i].last_date | date : "mediumDate" }}</small
+                <div
+                  class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
                 >
+                  <div class="d-flex mb-3">
+                    <button
+                      class="btn btn-light btn-square me-3"
+                      (click)="AddToFavorite(intern.data[i].id)"
+                    >
+                      <i class="far fa-heart text-secondary"></i>
+                    </button>
+                    <form action="">
+                      <button
+                        type="submit"
+                        class="btn btn-outline-secondary"
+                        href=""
+                        (click)="GetDetailOffer(intern.data[i].id)"
+                      >
+                        Postuler maintenant
+                      </button>
+                    </form>
+                  </div>
+                  <small class="text-truncate"
+                    ><i class="far fa-calendar-alt text-secondary me-2"></i>Date
+                    Limite:
+                    {{ intern.data[i].last_date | date : "mediumDate" }}</small
+                  >
+                </div>
               </div>
             </div>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <div
   class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn"
   data-wow-delay="0.1s"

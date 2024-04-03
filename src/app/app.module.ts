@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { MatIconModule } from '@angular/material/icon';
@@ -78,6 +79,7 @@ import { SearchComponent } from './pages/search/search.component';
     MatDialogModule,
     HttpClientModule,
     TranslateModule.forRoot(),
+    ToastrModule.forRoot(),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

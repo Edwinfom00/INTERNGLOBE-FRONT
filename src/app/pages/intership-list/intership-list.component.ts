@@ -54,11 +54,11 @@ export class IntershipListComponent implements OnInit {
   }
 
   link: any = [
-    { link: 'About Us' },
-    { link: 'Contact Us' },
-    { link: 'Our Services' },
-    { link: 'Privacy Policy' },
-    { link: 'Terms & Condition' },
+    { link: 'À Propos de Nous' }, // About Us
+    { link: 'Contactez-Nous' }, // Contact Us
+    { link: 'Nos Services' }, // Our Services
+    { link: 'Politique de Confidentialité' }, // Privacy Policy
+    { link: 'Conditions Générales' }, // Terms & Condition
   ];
 
   length = Array.from({ length: 25 }, (x, i) => i);

@@ -10,11 +10,11 @@ import { DatePipe } from '@angular/common';
 })
 export class InternshipdetailsComponent implements OnInit {
   link: any = [
-    { link: 'About Us' },
-    { link: 'Contact Us' },
-    { link: 'Our Services' },
-    { link: 'Privacy Policy' },
-    { link: 'Terms & Condition' },
+    { link: 'À Propos de Nous' }, // About Us
+    { link: 'Contactez-Nous' }, // Contact Us
+    { link: 'Nos Services' }, // Our Services
+    { link: 'Politique de Confidentialité' }, // Privacy Policy
+    { link: 'Conditions Générales' }, // Terms & Condition
   ];
 
   getHeaders(): HttpHeaders {

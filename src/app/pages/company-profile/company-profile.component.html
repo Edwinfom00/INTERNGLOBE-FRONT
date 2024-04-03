@@ -4,8 +4,8 @@
       <div class="col">
         <nav aria-label="breadcrumb" class="rounded-3 p-3 mb-4">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
-            <li class="breadcrumb-item active">Account Settings</li>
+            <li class="breadcrumb-item"><a routerLink="home">Accueil</a></li>
+            <li class="breadcrumb-item active">Paramètres du compte</li>
           </ol>
         </nav>
       </div>
@@ -36,7 +36,7 @@
                 type="button"
                 class="btn btn-outline-secondary"
               >
-                Import Company Logo
+                Importer le logo de l'entreprise
               </button>
             </div>
           </div>
@@ -45,23 +45,23 @@
           <div class="card-body p-0">
             <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between p-3">
-                <a href="">Account Settings</a>
+                <a href="">Paramètres du compte</a>
               </li>
               <li
                 class="list-group-item d-flex justify-content-between align-items-center p-3"
               >
-                <a routerLink="post">Post Interns</a>
+                <a routerLink="post">Publier des Stages</a>
               </li>
               <li
                 class="list-group-item d-flex justify-content-between align-items-center p-3"
               >
-                <a href="">Intern Posted</a>
+                <a href="">Stages Publiés</a>
               </li>
 
               <li
                 class="list-group-item d-flex justify-content-between align-items-center p-3"
               >
-                <a href="">Logout</a>
+                <a href="" class="btn btn-outline-danger">Déconnexion</a>
               </li>
             </ul>
           </div>
@@ -75,14 +75,14 @@
             (ngSubmit)="UpdateWrittingCompayIformation()"
           >
             <div class="card-body p-4">
-              <h3 class="fs-4 mb-1">Create Your Company</h3>
+              <h3 class="fs-4 mb-1">Créez Votre Entreprise</h3>
               <div class="mb-4">
-                <label for="" class="mb-2">Name*</label>
+                <label for="" class="mb-2">Nom*</label>
                 <input
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="Enter Name"
+                  placeholder="Entrez le Nom"
                   class="form-control"
                   value=""
                   [(ngModel)]="FormData.cname"
@@ -95,7 +95,7 @@
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="Enter Email"
+                  placeholder="Entrez l'Email"
                   class="form-control"
                   value=""
                   [(ngModel)]="FormData.email"
@@ -103,12 +103,12 @@
                 <p></p>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Address*</label>
+                <label for="" class="mb-2">Adresse*</label>
                 <input
                   type="text"
                   name="address"
                   id="address"
-                  placeholder="Enter Address"
+                  placeholder="Entrez l'Adresse"
                   class="form-control"
                   value=""
                   [(ngModel)]="FormData.address"
@@ -116,12 +116,12 @@
                 <p></p>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Website*</label>
+                <label for="" class="mb-2">Site Web*</label>
                 <input
                   type="text"
                   name="website"
                   id="email"
-                  placeholder="Enter Your Website(Optional)"
+                  placeholder="Entrez Votre Site Web (Optionnel)"
                   class="form-control"
                   value=""
                   [(ngModel)]="FormData.website"
@@ -129,12 +129,12 @@
                 <p></p>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">SLogan*</label>
+                <label for="" class="mb-2">Slogan*</label>
                 <input
                   type="text"
                   name="slogan"
                   id="email"
-                  placeholder="Slogan of your Company"
+                  placeholder="Slogan de votre Entreprise"
                   class="form-control"
                   value=""
                   [(ngModel)]="FormData.slogan"
@@ -169,7 +169,7 @@
             </div>
             <div class="card-footer p-4">
               <button type="submit" class="btn btn-outline-secondary">
-                Create
+                Créer
               </button>
             </div>
           </form>
@@ -178,21 +178,23 @@
         <form action="" (ngSubmit)="UpdatePassword()">
           <div class="card border-0 shadow mb-4">
             <div class="card-body p-4">
-              <h3 class="fs-4 mb-1">Change Password If you Want</h3>
+              <h3 class="fs-4 mb-1">
+                Changez de mot de passe si vous le souhaitez
+              </h3>
               <div class="mb-4">
-                <label for="" class="mb-2">Old Password*</label>
+                <label for="" class="mb-2">Ancien Mot de Passe*</label>
                 <input
                   type="password"
-                  placeholder="Old Password"
+                  placeholder="Ancien Mot de Passe"
                   class="form-control"
                   [(ngModel)]="FormData.current_password"
                 />
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">New Password*</label>
+                <label for="" class="mb-2">Nouveau Mot de Passe*</label>
                 <input
                   type="password"
-                  placeholder="New Password"
+                  placeholder="Nouveau Mot de Passe"
                   class="form-control"
                   [(ngModel)]="FormData.new_password"
                 />
@@ -200,7 +202,7 @@
             </div>
             <div class="card-footer p-4">
               <button type="submit" class="btn btn-outline-secondary">
-                Update
+                Mettre à jour
               </button>
             </div>
           </div>
@@ -208,23 +210,27 @@
 
         <div class="card border-0 shadow mb-4">
           <div class="card-body p-4">
-            <h3 class="fs-4 mb-1">Document Upload</h3>
+            <h3 class="fs-4 mb-1">Téléchargement de Documents</h3>
             <div class="mb-4">
-              <label for="" class="mb-2">Banner Image</label>
+              <label for="" class="mb-2">Image de Bannière</label>
               <input
                 type="file"
-                placeholder="Upload Cover Letter"
+                placeholder="Télécharger une Lettre de Motivation"
                 class="form-control"
               />
             </div>
             <div class="mb-4">
               <label for="" class="mb-2"></label>
-              <input type="file" placeholder="Upload CV" class="form-control" />
+              <input
+                type="file"
+                placeholder="Télécharger un CV"
+                class="form-control"
+              />
             </div>
           </div>
           <div class="card-footer p-4">
             <button type="submit" class="btn btn-outline-secondary">
-              Upload
+              Télécharger
             </button>
           </div>
         </div>

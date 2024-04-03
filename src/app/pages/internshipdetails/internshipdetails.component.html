@@ -2,18 +2,18 @@
 <div class="container-xxl py-5 bg-dark page-header mb-5">
   <div class="container my-5 pt-5 pb-4">
     <h1 class="display-3 text-white mb-3 animated slideInDown">
-      Internship Detail
+      Détails du stage
     </h1>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb text-uppercase">
         <li class="breadcrumb-item">
-          <a href="#" class="text-secondary">Home</a>
+          <a href="#" class="text-secondary">Accueil</a>
         </li>
         <li class="breadcrumb-item">
           <a href="#" class="text-secondary">Pages</a>
         </li>
         <li class="breadcrumb-item text-white active" aria-current="page">
-          Internship Detail
+          Détails du stage
         </li>
       </ol>
     </nav>
@@ -21,7 +21,7 @@
 </div>
 <!-- Header End -->
 
-<!-- Intern Detail Start -->
+<!-- Détail du stage -->
 <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
   <alert type="success" [dismissible]="true" *ngIf="showSuccessAlert">
     Votre candidature a été soumise avec succès.
@@ -66,9 +66,9 @@
         </div>
 
         <div class="mb-5" *ngFor="let intern of detailedInternData">
-          <h4 class="mb-3">Internship description</h4>
+          <h4 class="mb-3">Description du stage</h4>
           <p>{{ intern[1].description }}</p>
-          <h4 class="mb-3">Responsibility</h4>
+          <h4 class="mb-3">Responsabilités</h4>
           <p>{{ intern[1].roles }}</p>
           <ul class="list-unstyled">
             <li>
@@ -123,28 +123,28 @@
         </div>
 
         <div class="" *ngFor="let intern of detailedInternData">
-          <h4 class="mb-4">Apply For The Internship</h4>
+          <h4 class="mb-4">Postuler pour le stage</h4>
           <form>
             <div class="row g-3">
               <div class="col-12 col-sm-6">
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Your Name"
+                  placeholder="Votre nom"
                 />
               </div>
               <div class="col-12 col-sm-6">
                 <input
                   type="email"
                   class="form-control"
-                  placeholder="Your Email"
+                  placeholder="Votre e-mail"
                 />
               </div>
               <div class="col-12 col-sm-6">
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Your Phone Number"
+                  placeholder="Votre numéro de téléphone"
                 />
               </div>
               <div class="col-12 col-sm-6">
@@ -159,7 +159,7 @@
                   (click)="ApplyIntern(intern[1].id)"
                   type="submit"
                 >
-                  Apply Now
+                  Postuler maintenant
                 </button>
               </div>
             </div>
@@ -172,30 +172,31 @@
           class="bg-light rounded p-5 mb-4 wow slideInUp"
           data-wow-delay="0.1s"
         >
-          <h4 class="mb-4">Intern Summery</h4>
+          <h4 class="mb-4">Résumé de l'Internat</h4>
           <p>
-            <i class="fa fa-angle-right text-secondary me-2"></i>Published On:
+            <i class="fa fa-angle-right text-secondary me-2"></i>Date de
+            publication :
             {{ intern[1].created_at | date : "mediumDate" }}
           </p>
           <p>
-            <i class="fa fa-angle-right text-secondary me-2"></i>Vacancy: 123
-            Position
+            <i class="fa fa-angle-right text-secondary me-2"></i>Vacances : 123
+            Postes
           </p>
           <p>
-            <i class="fa fa-angle-right text-secondary me-2"></i>Internship
-            Nature: {{ intern[1].type }}
+            <i class="fa fa-angle-right text-secondary me-2"></i>Nature du stage
+            : {{ intern[1].type }}
           </p>
           <p>
-            <i class="fa fa-angle-right text-secondary me-2"></i>Location:
+            <i class="fa fa-angle-right text-secondary me-2"></i>Emplacement :
             {{ intern[1].position }}
           </p>
           <p class="m-0">
-            <i class="fa fa-angle-right text-secondary me-2"></i>Date Line:
+            <i class="fa fa-angle-right text-secondary me-2"></i>Date limite :
             {{ intern[1].last_date }}
           </p>
         </div>
         <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
-          <h4 class="mb-4">Company Detail</h4>
+          <h4 class="mb-4">Détails de l'entreprise</h4>
           <p class="m-0">
             Ipsum dolor ipsum accusam stet et et diam dolores, sed rebum
             sadipscing elitr vero dolores. Lorem dolore elitr justo et no
@@ -216,13 +217,13 @@
   <div class="container py-5">
     <div class="row g-5">
       <div class="col-lg-3 col-md-6">
-        <h5 class="text-white mb-4">Company</h5>
+        <h5 class="text-white mb-4">Société</h5>
         <a class="btn btn-link text-white-50" href="" *ngFor="let a of link">{{
           a.link
         }}</a>
       </div>
       <div class="col-lg-3 col-md-6">
-        <h5 class="text-white mb-4">Quick Links</h5>
+        <h5 class="text-white mb-4">Liens Rapides</h5>
         <a class="btn btn-link text-white-50" href="" *ngFor="let a of link">{{
           a.link
         }}</a>
@@ -256,19 +257,19 @@
         </div>
       </div>
       <div class="col-lg-3 col-md-6">
-        <h5 class="text-white mb-4">Newsletter</h5>
+        <h5 class="text-white mb-4">Bulletin d'Information</h5>
         <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
         <div class="position-relative mx-auto" style="max-width: 400px">
           <input
             class="form-control bg-transparent w-100 py-3 ps-4 pe-5"
             type="text"
-            placeholder="Your email"
+            placeholder="Votre email"
           />
           <button
             type="button"
             class="btn btn-secondary py-2 position-absolute top-0 end-0 mt-2 me-2"
           >
-            SignUp
+            S'inscrire
           </button>
         </div>
       </div>
@@ -280,15 +281,15 @@
         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
           &copy;
           <a class="border-bottom" href="https://interglobe.com">INTERNGLOBE</a
-          >, All Right Reserved. Designed By
+          >, Tous droits réservés. Conçu par
           <a class="border-bottom" href="https://interglobe.com">EdwinFom</a>
         </div>
         <div class="col-md-6 text-center text-md-end">
           <div class="footer-menu">
-            <a href="">Home</a>
+            <a href="">Accueil</a>
             <a href="">Cookies</a>
-            <a href="">Help</a>
-            <a href="">FQAs</a>
+            <a href="">Aide</a>
+            <a href="">FAQ</a>
           </div>
         </div>
       </div>

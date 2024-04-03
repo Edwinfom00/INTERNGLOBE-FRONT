@@ -18,18 +18,16 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav ms-auto p-4 p-lg-0">
-      <a routerLink="" class="nav-item nav-link">{{ "home" | translate }}</a>
-      <a routerLink="about" class="nav-item nav-link">{{
-        "about" | translate
-      }}</a>
+      <a routerLink="" class="nav-item nav-link">Accueil</a>
+      <a routerLink="about" class="nav-item nav-link">À propos</a>
       <div class="nav-item dropdown">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-          >Internship</a
+          >Stage</a
         >
         <div class="dropdown-menu rounded-0 m-0">
-          <a routerLink="list" class="dropdown-item">Internship List</a>
+          <a routerLink="list" class="dropdown-item">Liste de stages</a>
           <a routerLink="intershipdetails" class="dropdown-item"
-            >Internship Detail</a
+            >Détails du stage</a
           >
         </div>
       </div>
@@ -38,29 +36,18 @@
           >Pages</a
         >
         <div class="dropdown-menu rounded-0 m-0">
-          <a routerLink="category" class="dropdown-item">Internship Category</a>
-          <a routerLink="company" class="dropdown-item">Company</a>
+          <a routerLink="category" class="dropdown-item">Catégorie de stage</a>
+          <a routerLink="company" class="dropdown-item">Entreprise</a>
           <a routerLink="error" class="dropdown-item">404</a>
         </div>
       </div>
       <a routerLink="contact" class="nav-item nav-link">Contact</a>
     </div>
-    <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <select class="form-select" (change)="ChangeLang($event)" name="" id="">
-          <option [selected]="lang === 'en'" value="en">
-            <i class="dropdown-menu" style="color: blue"></i>English
-          </option>
-          <option [selected]="lang === 'fr'" value="fr">
-            <i class="fa-solid fa-flag-fr" style="color: red"></i>French
-          </option>
-        </select>
-      </li>
-    </ul>
-
-    <button class="btn btn-secondary mx-2" (click)="getDialog()">Log In</button>
+    <button class="btn btn-secondary mx-2" (click)="getDialog()">
+      Se connecter
+    </button>
     <button class="btn btn-light text-secondary" routerLink="register">
-      Sign In
+      S'inscrire
     </button>
   </div>
 </nav>

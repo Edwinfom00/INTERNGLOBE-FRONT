@@ -80,32 +80,15 @@ export class HomeComponent implements OnInit {
   translate(key: string): string {
     return this.translateService.translations(key);
   }
-  option: any = [
-    { emplacement: 'emplacement1' },
-    { emplacement: 'emplacement2' },
-    { emplacement: 'emplacement2' },
-    { emplacement: 'emplacement4' },
-  ];
-  option2: any = [
-    { location: 'location1' },
-    { location: 'location2' },
-    { location: 'location3' },
-    { location: 'location4' },
-  ];
 
-  slides = [
-    { image: 'assets/img/1.jpg', text: 'First' },
-    { image: 'assets/img/2.jpg', text: 'Second' },
-    { image: 'assets/img/3.jpg', text: 'Third' },
-  ];
   noWrapSlides = false;
   showIndicator = true;
   link: any = [
-    { link: 'About Us' },
-    { link: 'Contact Us' },
-    { link: 'Our Services' },
-    { link: 'Privacy Policy' },
-    { link: 'Terms & Condition' },
+    { link: 'À Propos de Nous' }, // About Us
+    { link: 'Contactez-Nous' }, // Contact Us
+    { link: 'Nos Services' }, // Our Services
+    { link: 'Politique de Confidentialité' }, // Privacy Policy
+    { link: 'Conditions Générales' }, // Terms & Condition
   ];
   darkMode = signal<boolean>(
     JSON.parse(window.localStorage.getItem('darkMode') ?? 'false')
