@@ -65,7 +65,9 @@
               <li
                 class="list-group-item d-flex justify-content-between align-items-center p-3"
               >
-                <a href="" class="btn btn-outline-danger">Déconnexion</a>
+                <a (click)="Logout()" class="btn btn-outline-danger"
+                  >Déconnexion</a
+                >
               </li>
             </ul>
           </div>
@@ -311,45 +313,78 @@
           </form>
         </div>
         <div class="card border-0 shadow mb-4">
-          <div class="card-body p-4">
-            <form action="" (ngSubmit)="UpdatePassword()">
+          <form action="" (ngSubmit)="UpdatePassword()" method="post">
+            <div class="card-body p-4">
               <h3 class="fs-4 mb-1">Modifier le mot de passe</h3>
+
               <div class="mb-4">
-                <label for="" class="mb-2">Ancien mot de passe*</label>
+                <label for="current_password" class="mb-2"
+                  >Ancien mot de passe*</label
+                >
                 <input
-                  name="password"
+                  name="current_password"
+                  id="current_password"
                   type="password"
                   placeholder="Ancien mot de passe"
                   class="form-control"
+                  #current_password="ngModel"
                   [(ngModel)]="FormData.current_password"
+                  [class.is-invalid]="
+                    current_password.invalid &&
+                    (current_password.dirty || current_password.touched)
+                  "
+                  required
                 />
+                <div
+                  *ngIf="
+                    current_password.invalid &&
+                    (current_password.dirty || current_password.touched)
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="current_password.errors['required']">
+                    Le mot de passe courant est requis.
+                  </div>
+                </div>
               </div>
+
               <div class="mb-4">
-                <label for="" class="mb-2">Nouveau mot de passe*</label>
+                <label for="new_password" class="mb-2"
+                  >Nouveau mot de passe*</label
+                >
                 <input
-                  name="newpassword"
+                  name="new_password"
+                  id="new_password"
                   type="password"
                   placeholder="Nouveau mot de passe"
                   class="form-control"
+                  #new_password="ngModel"
                   [(ngModel)]="FormData.new_password"
+                  [class.is-invalid]="
+                    new_password.invalid &&
+                    (new_password.dirty || new_password.touched)
+                  "
+                  required
                 />
+                <div
+                  *ngIf="
+                    new_password.invalid &&
+                    (new_password.dirty || new_password.touched)
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="new_password.errors['required']">
+                    Le nouveau mot de passe est requis.
+                  </div>
+                </div>
               </div>
-            </form>
-
-            <!-- <div class="mb-4">
-              <label for="" class="mb-2">Confirm Password*</label>
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                class="form-control"
-              />
-            </div> -->
-          </div>
-          <div class="card-footer p-4">
-            <button type="submit" class="btn btn-outline-secondary">
-              Mettre à jour
-            </button>
-          </div>
+            </div>
+            <div class="card-footer p-4">
+              <button type="submit" class="btn btn-outline-secondary">
+                Mettre à jour
+              </button>
+            </div>
+          </form>
         </div>
         <div class="card border-0 shadow mb-4">
           <form (ngSubmit)="onSubmit()" [formGroup]="form">

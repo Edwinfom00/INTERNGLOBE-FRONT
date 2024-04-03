@@ -66,6 +66,15 @@ export class ProfileComponent implements OnInit {
   }
 
   UpdateWritingProfile() {
+    const accessToken = localStorage.getItem('access_token');
+
+    if (!accessToken) {
+      this.toastrservice.error("S'il vous plait Connectez-vous d'abord", '', {
+        timeOut: 3000,
+        progressBar: true,
+      });
+      return;
+    }
     this.httpclient
       .put('http://localhost:8000/api/user/profile/update', this.FormData, {
         headers: this.getHeaders(),
@@ -85,6 +94,15 @@ export class ProfileComponent implements OnInit {
   }
 
   UpdatePassword() {
+    const accessToken = localStorage.getItem('access_token');
+
+    if (!accessToken) {
+      this.toastrservice.error("S'il vous plait Connectez-vous d'abord", '', {
+        timeOut: 3000,
+        progressBar: true,
+      });
+      return;
+    }
     this.httpclient
       .put('http://localhost:8000/api/user/profile/password', this.FormData, {
         headers: this.getHeaders(),
@@ -109,11 +127,53 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  Logout() {
+    const token = localStorage.getItem('access_token'); // Récupérer le jeton d'accès du stockage local
+
+    if (!token) {
+      this.toastrservice.error(
+        "vous ne pouvez pas vous déconnecter si vous n'etes pas connecter",
+        '',
+        {
+          timeOut: 3000,
+          progressBar: true,
+        }
+      );
+      return;
+    }
+    if (token) {
+      this.httpclient
+        .post('http://localhost:8000/api/logout', null, {
+          headers: this.getHeaders(),
+        })
+        .subscribe((response: any) => {
+          if (
+            response.message === "L'utilisateur s'est déconnecté avec succès"
+          ) {
+            localStorage.removeItem('access_token'); // Supprimer le jeton d'accès du stockage local
+            this.toastrservice.warning(JSON.stringify(response.message), '', {
+              timeOut: 3000,
+              progressBar: true,
+            });
+          }
+        });
+    }
+  }
+
   UploadCoverLetter(event: any) {
     this.files = event.target.files[0];
     console.log(this.files);
   }
   onSubmit() {
+    const accessToken = localStorage.getItem('access_token');
+
+    if (!accessToken) {
+      this.toastrservice.error("S'il vous plait Connectez-vous d'abord", '', {
+        timeOut: 3000,
+        progressBar: true,
+      });
+      return;
+    }
     this.submitted = true;
     if (this.form.invalid) {
       return;
