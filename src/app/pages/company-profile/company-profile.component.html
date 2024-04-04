@@ -77,43 +77,85 @@
             <div class="card-body p-4">
               <h3 class="fs-4 mb-1">Créez Votre Entreprise</h3>
               <div class="mb-4">
-                <label for="" class="mb-2">Nom*</label>
+                <label for="name" class="mb-2">Nom*</label>
                 <input
                   type="text"
                   name="name"
+                  #name="ngModel"
                   id="name"
                   placeholder="Entrez le Nom"
                   class="form-control"
-                  value=""
+                  [class.is-invalid]="
+                    name.invalid && (name.dirty || name.touched)
+                  "
                   [(ngModel)]="FormData.cname"
+                  required
+                  minlength="2"
+                  maxlength="50"
                 />
-                <p></p>
+                <div
+                  *ngIf="name.invalid && (name.dirty || name.touched)"
+                  class="text-danger"
+                >
+                  <div *ngIf="name.errors['required']">Le nom est requis.</div>
+                  <div *ngIf="name.errors['minlength']">
+                    Le nom doit comporter au moins 2 caractères.
+                  </div>
+                  <div *ngIf="name.errors['maxlength']">
+                    Le nom ne peut pas comporter plus de 50 caractères.
+                  </div>
+                </div>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Email*</label>
+                <label for="email" class="mb-2">Email*</label>
                 <input
                   type="email"
                   name="email"
+                  #email="ngModel"
                   id="email"
                   placeholder="Entrez l'Email"
                   class="form-control"
-                  value=""
                   [(ngModel)]="FormData.email"
+                  [class.is-invalid]="
+                    email.invalid && (email.dirty || email.touched)
+                  "
+                  required
                 />
-                <p></p>
+                <div
+                  *ngIf="email.invalid && (email.dirty || email.touched)"
+                  class="text-danger"
+                >
+                  <div *ngIf="email.errors['required']">
+                    L'email est requis.
+                  </div>
+                  <div *ngIf="email.errors['email']">
+                    L'email n'est pas valide.
+                  </div>
+                </div>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Adresse*</label>
+                <label for="address" class="mb-2">Adresse*</label>
                 <input
                   type="text"
                   name="address"
+                  #address="ngModel"
                   id="address"
                   placeholder="Entrez l'Adresse"
                   class="form-control"
-                  value=""
+                  [class.is-invalid]="
+                    address.invalid && (address.dirty || address.touched)
+                  "
                   [(ngModel)]="FormData.address"
+                  required
                 />
-                <p></p>
+                <div
+                  *ngIf="address.invalid && (address.dirty || address.touched)"
+                  class="text-danger"
+                >
+                  <div *ngIf="address.errors['required']">
+                    L'adresse est requise.
+                  </div>
+                </div>
               </div>
               <div class="mb-4">
                 <label for="" class="mb-2">Site Web*</label>
@@ -129,48 +171,108 @@
                 <p></p>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Slogan*</label>
+                <label for="slogan" class="mb-2">Slogan*</label>
                 <input
                   type="text"
                   name="slogan"
-                  id="email"
+                  id="slogan"
                   placeholder="Slogan de votre Entreprise"
                   class="form-control"
-                  value=""
                   [(ngModel)]="FormData.slogan"
+                  required
+                  [class.is-invalid]="
+                    slogan.invalid && (slogan.dirty || slogan.touched)
+                  "
+                  #slogan="ngModel"
+                  minlength="5"
+                  maxlength="100"
                 />
-                <p></p>
+                <div
+                  *ngIf="slogan.invalid && (slogan.dirty || slogan.touched)"
+                  class="text-danger"
+                >
+                  <div *ngIf="slogan.errors['required']">
+                    Le slogan est requis.
+                  </div>
+                  <div *ngIf="slogan.errors['minlength']">
+                    Le slogan doit comporter au moins 5 caractères.
+                  </div>
+                  <div *ngIf="slogan.errors['maxlength']">
+                    Le slogan ne peut pas comporter plus de 100 caractères.
+                  </div>
+                </div>
               </div>
+
               <div class="mb-4">
-                <label for="" class="mb-2">Mobile</label>
+                <label for="mobile" class="mb-2">Portable*</label>
                 <input
                   type="tel"
                   name="mobile"
                   id="mobile"
-                  placeholder="Mobile"
+                  placeholder="Portable"
                   class="form-control"
-                  value=""
+                  [class.is-invalid]="
+                    mobile.invalid && (mobile.dirty || mobile.touched)
+                  "
                   [(ngModel)]="FormData.phone"
+                  #mobile="ngModel"
+                  required
+                  pattern="\\d{9}"
                 />
+                <div
+                  *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+                  class="text-danger"
+                >
+                  <div *ngIf="mobile.errors['required']">
+                    Le numéro de portable est requis.
+                  </div>
+                  <div *ngIf="mobile.errors['pattern']">
+                    Le numéro de portable doit comporter exactement 9 chiffres.
+                  </div>
+                </div>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Description</label>
+                <label for="description" class="mb-2">Description*</label>
                 <textarea
                   rows="5"
                   cols="5"
+                  #description="ngModel"
                   name="description"
                   id="description"
                   placeholder="Description"
                   class="form-control"
-                  value=""
                   [(ngModel)]="FormData.description"
+                  required
+                  [class.is-invalid]="
+                    description.invalid &&
+                    (description.dirty || description.touched)
+                  "
+                  minlength="10"
+                  maxlength="500"
                 ></textarea>
+                <div
+                  *ngIf="
+                    description.invalid &&
+                    (description.dirty || description.touched)
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="description.errors['required']">
+                    La description est requise.
+                  </div>
+                  <div *ngIf="description.errors['minlength']">
+                    La description doit comporter au moins 10 caractères.
+                  </div>
+                  <div *ngIf="description.errors['maxlength']">
+                    La description ne peut pas comporter plus de 500 caractères.
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="card-footer p-4">
-              <button type="submit" class="btn btn-outline-secondary">
-                Créer
-              </button>
+              <div class="card-footer p-4">
+                <button type="submit" class="btn btn-outline-secondary">
+                  Créer
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -182,22 +284,78 @@
                 Changez de mot de passe si vous le souhaitez
               </h3>
               <div class="mb-4">
-                <label for="" class="mb-2">Ancien Mot de Passe*</label>
+                <label for="current_password" class="mb-2"
+                  >Ancien Mot de Passe*</label
+                >
                 <input
                   type="password"
+                  #current_password="ngModel"
                   placeholder="Ancien Mot de Passe"
                   class="form-control"
                   [(ngModel)]="FormData.current_password"
+                  required
+                  [class.is-invalid]="
+                    current_password.invalid &&
+                    (current_password.dirty || current_password.touched)
+                  "
+                  minlength="6"
+                  maxlength="20"
                 />
+                <div
+                  *ngIf="
+                    current_password.invalid &&
+                    (current_password.dirty || current_password.touched)
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="current_password.errors['required']">
+                    Le mot de passe actuel est requis.
+                  </div>
+                  <div *ngIf="current_password.errors['minlength']">
+                    Le mot de passe doit comporter au moins 6 caractères.
+                  </div>
+                  <div *ngIf="current_password.errors['maxlength']">
+                    Le mot de passe ne peut pas comporter plus de 20 caractères.
+                  </div>
+                </div>
               </div>
               <div class="mb-4">
-                <label for="" class="mb-2">Nouveau Mot de Passe*</label>
+                <label for="new_password" class="mb-2"
+                  >Nouveau Mot de Passe*</label
+                >
                 <input
                   type="password"
+                  #new_password="ngModel"
                   placeholder="Nouveau Mot de Passe"
                   class="form-control"
                   [(ngModel)]="FormData.new_password"
+                  required
+                  minlength="6"
+                  maxlength="20"
+                  [class.is-invalid]="
+                    new_password.invalid &&
+                    (new_password.dirty || new_password.touched)
+                  "
                 />
+                <div
+                  *ngIf="
+                    new_password.invalid &&
+                    (new_password.dirty || new_password.touched)
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="new_password.errors['required']">
+                    Le nouveau mot de passe est requis.
+                  </div>
+                  <div *ngIf="new_password.errors['minlength']">
+                    Le nouveau mot de passe doit comporter au moins 6
+                    caractères.
+                  </div>
+                  <div *ngIf="new_password.errors['maxlength']">
+                    Le nouveau mot de passe ne peut pas comporter plus de 20
+                    caractères.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="card-footer p-4">

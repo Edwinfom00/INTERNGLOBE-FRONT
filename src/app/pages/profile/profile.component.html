@@ -387,7 +387,7 @@
           </form>
         </div>
         <div class="card border-0 shadow mb-4">
-          <form (ngSubmit)="onSubmit()" [formGroup]="form">
+          <!-- <form (ngSubmit)="onSubmit()" [formGroup]="form">
             <div class="card-body p-4">
               <h3 class="fs-4 mb-1">Téléchargement de documents</h3>
               <div class="mb-4">
@@ -412,7 +412,7 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="mb-4">
+              <div class="mb-4">
                 <label for="" class="mb-2">CV*</label>
                 <input
                     type="file"
@@ -431,14 +431,36 @@
                         Le CV est requis.
                     </div>
                 </div>
-            </div> -->
+            </div>
             </div>
             <div class="card-footer p-4">
               <button type="submit" class="btn btn-outline-secondary">
                 Télécharger
               </button>
             </div>
-          </form>
+          </form> -->
+
+          <div class="card-body">
+            <ngx-file-drop
+              dropZoneLabel="Drop files here"
+              (onFileDrop)="dropped($event)"
+              (onFileOver)="fileOver($event)"
+              (onFileLeave)="fileLeave($event)"
+            >
+              <ng-template
+                ngx-file-drop-content-tmp
+                let-openFileSelector="openFileSelector"
+              >
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  (click)="openFileSelector()"
+                >
+                  Browse Files
+                </button>
+              </ng-template>
+            </ngx-file-drop>
+          </div>
         </div>
       </div>
     </div>

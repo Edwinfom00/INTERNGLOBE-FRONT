@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Import de Router
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -14,8 +15,12 @@ export class RegisterComponent implements OnInit {
     password: '',
     user_type: '',
   };
-  showSuccessAlert = false;
-  constructor(private http: HttpClient, private router: Router) {} // Injecter le Router
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastrservice: ToastrService
+  ) {} // Injecter le Router
 
   ngOnInit(): void {}
   Register() {
@@ -24,8 +29,10 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         (resultData: any) => {
           console.log(resultData);
-          this.showSuccessAlert = true; // Affiche l'alerte
-
+          this.toastrservice.success('Compte créé avec succès', '', {
+            timeOut: 3000,
+            progressBar: true,
+          });
           switch (this.formData.user_type) {
             case 'company':
               this.router.navigate(['/companyprofile']);

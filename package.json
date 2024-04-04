@@ -26,6 +26,7 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "animate.css": "^4.1.1",
     "ngx-bootstrap": "^11.0.2",
+    "ngx-file-drop": "^16.0.0",
     "ngx-owl-carousel-o": "^16.0.0",
     "ngx-toastr": "^16.2.0",
     "ngx-translate": "^0.0.1-security",

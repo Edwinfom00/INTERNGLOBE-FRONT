@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { MatIconModule } from '@angular/material/icon';
@@ -80,6 +81,7 @@ import { SearchComponent } from './pages/search/search.component';
     HttpClientModule,
     TranslateModule.forRoot(),
     ToastrModule.forRoot(),
+    NgxFileDropModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

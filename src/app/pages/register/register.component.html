@@ -2,9 +2,6 @@
   <div class="text-secondary fs-3 text-center fw-bold mb-3">
     Formulaire d'Inscription
   </div>
-  <alert type="success" [dismissible]="true" *ngIf="showSuccessAlert">
-    Inscription réussie!
-  </alert>
   <div class="m-2">
     <form class="w-100" (ngSubmit)="Register()">
       <div class="mb-3">
@@ -18,7 +15,20 @@
           aria-describedby="TextHelp"
           name="username"
           [(ngModel)]="formData.name"
+          #username="ngModel"
+          [class.is-invalid]="
+            username.invalid && (username.dirty || username.touched)
+          "
+          required
         />
+        <div
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="username.errors['required']">
+            Le nom utilisateur est requis.
+          </div>
+        </div>
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Adresse Email</label>
@@ -29,7 +39,18 @@
           aria-describedby="emailHelp"
           name="email"
           [(ngModel)]="formData.email"
+          [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+          #email="ngModel"
+          required
         />
+        <div
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="email.errors['required']">
+            L'adresse email est requis.
+          </div>
+        </div>
       </div>
       <div id="emailHelp" class="form-text">
         Nous ne partagerons jamais votre adresse email avec qui que ce soit.
@@ -44,7 +65,24 @@
           id="exampleInputPassword1"
           name="password"
           [(ngModel)]="formData.password"
+          [class.is-invalid]="
+            password.invalid && (password.dirty || password.touched)
+          "
+          #password="ngModel"
+          required
+          minlength="8"
         />
+        <div
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="password.errors['required']">
+            La mot de passe est requis.
+          </div>
+          <div *ngIf="password.errors['minlength']">
+            Le mot de passe doit comporter au moins 8 caractères.
+          </div>
+        </div>
       </div>
       <div class="mb-3">
         <label for="type" class="form-label">Type d'Utilisateur</label>
@@ -66,8 +104,5 @@
         />
       </div>
     </form>
-  </div>
-  <div class="row">
-    <div class="row"></div>
   </div>
 </div>

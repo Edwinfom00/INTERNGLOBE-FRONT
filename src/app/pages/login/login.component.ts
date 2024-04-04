@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,25 +13,42 @@ export class LoginComponent {
     google_id: '',
   };
 
-  showSuccessAlert = false;
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private toastrservice: ToastrService
+  ) {}
 
   Login() {
     this.httpClient
       .post('http://localhost:8000/api/login', this.formData)
-      .subscribe((response: any) => {
-        if (response.access_token) {
-          // Stocker le jeton d'accès dans le stockage local
-          localStorage.setItem('access_token', response.access_token);
-          // Vous pouvez également stocker d'autres informations utilisateur si nécessaire
-          // localStorage.setItem('user', JSON.stringify(response.user));
+      .subscribe({
+        next: (response: any) => {
+          if (response.access_token) {
+            // Stocker le jeton d'accès dans le stockage local
+            localStorage.setItem('access_token', response.access_token);
+            // Vous pouvez également stocker d'autres informations utilisateur si nécessaire
+            // localStorage.setItem('user', JSON.stringify(response.user));
 
-          this.showSuccessAlert = true; // Affiche l'alerte
-          this.formData.email = '';
-          this.formData.password = '';
-        }
+            console.log(response);
+            this.formData.email = '';
+            this.formData.password = '';
+
+            this.toastrservice.success(JSON.stringify(response.message), '', {
+              timeOut: 3000,
+              progressBar: true,
+            });
+          }
+        },
+        error: (error) => {
+          this.toastrservice.error(JSON.stringify(error.message), '', {
+            timeOut: 3000,
+            progressBar: true,
+          });
+        },
       });
   }
+
+  // Fonction pour se connecter avec Google
   LoginWithGoogle() {
     this.httpClient
       .get('http://localhost:8000/api/auth/google/redirect')

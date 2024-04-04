@@ -1,12 +1,9 @@
 <div class="card">
   <div class="card-body">
     <div class="text-center mb-2">
-      <h3 class="fw-bold fs-5">Log In</h3>
-      <p class="text-secondary">Get access to your account</p>
+      <h3 class="fw-bold fs-5">Connexion</h3>
+      <p class="text-secondary">Accédez à votre compte</p>
     </div>
-    <alert type="success" [dismissible]="true" *ngIf="showSuccessAlert">
-      Connected Successfully
-    </alert>
     <!-- <form action="" (ngSubmit)="LoginWithGoogle()">
       <button
         type="submit"
@@ -16,15 +13,15 @@
       >
         <i class="fab fa-google text-danger fs-6"></i>&nbsp;&nbsp;<span
           class="text-warning"
-          >Login</span
+          >Se connecter</span
         >&nbsp;&nbsp;
-        <span class="text-success">with</span>
+        <span class="text-success">avec</span>
         Google
       </button>
     </form> -->
     <!-- <div class="position-relative">
       <hr class="text-secondary divider" />
-      <div class="divider-content-center">Or</div>
+      <div class="divider-content-center">Ou</div>
     </div> -->
     <form action="" (ngSubmit)="Login()">
       <div class="input-group mb-3">
@@ -34,7 +31,7 @@
         <input
           type="text"
           class="form-control form-control-lg fs-6"
-          placeholder="Email address"
+          placeholder="Adresse e-mail"
           name="email"
           [(ngModel)]="formData.email"
         />
@@ -46,7 +43,7 @@
         <input
           type="password"
           class="form-control form-control-lg fs-6"
-          placeholder="Password"
+          placeholder="Mot de passe"
           name="email"
           [(ngModel)]="formData.password"
         />
@@ -55,20 +52,20 @@
         <div class="form-check">
           <input type="checkbox" class="form-check-input" id="formCheck" />
           <label for="formCheck" class="form-check-label text-secondary"
-            ><small>Remember Me</small></label
+            ><small>Se souvenir de moi</small></label
           >
         </div>
         <div>
-          <small><a href="">Forgot Password</a></small>
+          <small><a href="">Mot de passe oublié</a></small>
         </div>
       </div>
       <button type="submit" class="btn btn-outline-secondary btn-lg w-100">
-        Login
+        Connexion
       </button>
       <div class="text-center">
         <small
-          >Don't have an account?
-          <a routerLink="register" class="fw-bold">Sign up</a></small
+          >Vous n'avez pas de compte?
+          <a routerLink="register" class="fw-bold">Inscrivez-vous</a></small
         >
       </div>
     </form>

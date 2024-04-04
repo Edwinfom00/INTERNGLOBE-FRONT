@@ -4,6 +4,11 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { CoverLetter } from './cover-letter.model';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from './data.service';
+import {
+  NgxFileDropEntry,
+  FileSystemFileEntry,
+  FileSystemDirectoryEntry,
+} from 'ngx-file-drop';
 
 @Component({
   selector: 'app-profile',
@@ -34,7 +39,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  files: any;
   form: FormGroup;
   submitted: boolean = false;
   cover_letter = new CoverLetter();
@@ -160,35 +164,76 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  UploadCoverLetter(event: any) {
-    this.files = event.target.files[0];
-    console.log(this.files);
+  // UploadCoverLetter(event: any) {
+  //   this.files = event.target.files[0];
+  //   console.log(this.files);
+  // }
+  // onSubmit() {
+  //   const accessToken = localStorage.getItem('access_token');
+
+  //   if (!accessToken) {
+  //     this.toastrservice.error("S'il vous plait Connectez-vous d'abord", '', {
+  //       timeOut: 3000,
+  //       progressBar: true,
+  //     });
+  //     return;
+  //   }
+  //   this.submitted = true;
+  //   if (this.form.invalid) {
+  //     return;
+  //   }
+  //   const formdata = new FormData();
+
+  //   formdata.append('cover_letter', this.files, this.files.name);
+  //   this.dataService.UploadCoverLetter(formdata).subscribe((data) => {
+  //     this.data = data;
+  //     console.log(this.data);
+  //     this.toastrservice.success(JSON.stringify(this.data.message), '', {
+  //       timeOut: 3000,
+  //       progressBar: true,
+  //     });
+  //     this.form.reset();
+  //   });
+  // }
+  public files: NgxFileDropEntry[] = [];
+
+  public dropped(files: NgxFileDropEntry[]) {
+    this.files = files;
+    for (const droppedFile of files) {
+      // Is it a file?
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          // Here you can access the real file
+          console.log(droppedFile.relativePath, file);
+
+          // You could upload it like this:
+          const formData = new FormData();
+          formData.append('cover_letter', file, droppedFile.relativePath);
+
+          this.httpclient
+            .post(
+              'http://localhost:8000/api/user/profile/coverletter',
+              formData,
+              { headers: this.getHeaders() }
+            )
+            .subscribe((data) => {
+              console.log(data);
+            });
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        console.log(droppedFile.relativePath, fileEntry);
+      }
+    }
   }
-  onSubmit() {
-    const accessToken = localStorage.getItem('access_token');
 
-    if (!accessToken) {
-      this.toastrservice.error("S'il vous plait Connectez-vous d'abord", '', {
-        timeOut: 3000,
-        progressBar: true,
-      });
-      return;
-    }
-    this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
-    const formdata = new FormData();
+  public fileOver(event) {
+    console.log(event);
+  }
 
-    formdata.append('cover_letter', this.files, this.files.name);
-    this.dataService.UploadCoverLetter(formdata).subscribe((data) => {
-      this.data = data;
-      console.log(this.data);
-      this.toastrservice.success(JSON.stringify(this.data.message), '', {
-        timeOut: 3000,
-        progressBar: true,
-      });
-      this.form.reset();
-    });
+  public fileLeave(event) {
+    console.log(event);
   }
 }
